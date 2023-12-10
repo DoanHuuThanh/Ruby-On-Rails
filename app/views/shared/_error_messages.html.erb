@@ -1,0 +1,20 @@
+<%if @user.errors.any?%>
+<div id="error_explanation">
+<div class="alert alert-danger">
+The form contains <%= pluralize(@user.errors.count, "error") %>.
+ <!--@user.errors.count: Đây là một phương thức trong Rails để đếm số lượng lỗi của một đối tượng
+  Trong ngữ cảnh này, có thể là số lượng lỗi của đối tượng @user, -->
+  <!--pluralize: Đây là một helper method trong Rails được sử dụng để xử lý vấn đề liên quan đến số ít và số nhiều trong ngôn ngữ.
+   Nó nhận vào một số và một chuỗi, sau đó quyết định xem nên sử dụng số ít hay số nhiều cho chuỗi đó.-->
+
+   <!--Nếu @user.errors.count là 0, chuỗi được hiển thị sẽ là "0 errors".
+Nếu @user.errors.count là 1, chuỗi sẽ là "1 error".
+Nếu @user.errors.count là 2, chuỗi sẽ là "2 errors".-->
+</div>
+<ul>
+<% @user.errors.full_messages.each do |msg| %> <!--hiển thị lỗi-->
+<li><%= msg %></li>
+<% end %>
+</ul>
+</div>
+<%end%>

@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+
+@layer components {
+  .btn-primary {
+    @apply py-2 px-4 bg-blue-200;
+  }
+}
+
+*/
+
+/* Reset some default styles */
+/* Mặc định ẩn menu con */
+.nav-item.dropdown {
+  position: relative;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  min-width: 80px;
+  z-index: 1000;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: cornsilk;
+
+  
+}
+
+
+/* Hiển thị menu con khi hover vào menu cha */
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Dropdown Menu Items */
+.dropdown-menu li {
+  display: block;
+}
+
+/* Style for links in the dropdown menu */
+.dropdown-menu a {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+/* Hover effect for links in the dropdown menu */
+.dropdown-menu a:hover {
+  background-color: #f5f5f5;
+}
+
+header {
+  position: relative; 
+  left: 0px;
+}

@@ -1,0 +1,6 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+  # cung cấp dữ liệu mẫu với michael là tên của 1 bản ghi
+  michael:
+    name: Michael Example
+    email: michael@example.com
+    password_digest: <%= User.digest('password') %>

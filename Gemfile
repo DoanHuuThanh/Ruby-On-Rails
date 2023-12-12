@@ -88,3 +88,5 @@ gem "cssbundling-rails", "~> 1.3"
 gem "jsbundling-rails", "~> 1.2"
 
 gem "tailwindcss-rails", "~> 2.0"
+
+gem 'pry-rails', :group => :development

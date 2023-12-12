@@ -12,8 +12,7 @@
 
 */
 
-/* Reset some default styles */
-/* Mặc định ẩn menu con */
+
 .nav-item.dropdown {
   position: relative;
 }
@@ -36,17 +35,17 @@
 }
 
 
-/* Hiển thị menu con khi hover vào menu cha */
+
 .nav-item.dropdown:hover .dropdown-menu {
   display: block;
 }
 
-/* Dropdown Menu Items */
+
 .dropdown-menu li {
   display: block;
 }
 
-/* Style for links in the dropdown menu */
+
 .dropdown-menu a {
   display: block;
   padding: 8px 16px;
@@ -64,3 +63,8 @@ header {
   position: relative; 
   left: 0px;
 }
+
+h1 {
+  font-size: 100px ;
+}
+

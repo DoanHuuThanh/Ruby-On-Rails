@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:edit, :update, :index] # trc khi thực hiện các hành động edit,update trong controller,
+                                                        # hãy gọi phương thức logged_in_user
+  before_action :correct_user, only: [:edit, :update]
   def index
     @user = User.all
   end
@@ -8,6 +11,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
+  def edit
+    @user = User.find(params[:id])
+  end
+
 
   def create
     @user = User.new(user_params)
@@ -17,9 +24,20 @@ class UsersController < ApplicationController
         flash[:success] = "User created successfully"
         redirect_to @user
      else
-      render 'new'
+         render 'new'
     end
   end
+
+  def update
+       @user = User.find(params[:id])
+       if @user.update(user_params)
+             flash[:success] = "User updated successfully"
+             redirect_to @user
+        else
+          render 'edit'
+       end
+  end
+
 
   private
 
@@ -30,5 +48,12 @@ class UsersController < ApplicationController
     #.permit(:name, :email, :password, :password_confirmation): Phương thức permit xác định danh sách các tham số mà bạn
     #cho phép được chấp nhận trong hash params[:user]. Nếu một tham số không nằm trong danh sách này, nó sẽ bị loại bỏ.
   end
+
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless @user == current_user
+    end
+
 
 end

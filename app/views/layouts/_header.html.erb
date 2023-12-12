@@ -31,7 +31,7 @@
                 <%= link_to "Profile", current_user, class: "dropdown-item" %>
               </li>
               <li>
-                <%= link_to "Setting", '#', class: "dropdown-item" %>
+                <%= link_to "Setting", edit_user_path(current_user), class: "dropdown-item" %>
               </li>
               <li>
                 <%= link_to "Logout", logout_path, method: :delete, class: "dropdown-item" %>

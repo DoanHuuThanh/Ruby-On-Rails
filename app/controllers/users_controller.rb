@@ -1,9 +1,16 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :index] # trc khi thực hiện các hành động edit,update trong controller,
+  before_action :logged_in_user, only: [:edit, :update, :index, :destroy] # trc khi thực hiện các hành động edit,update trong controller,
                                                         # hãy gọi phương thức logged_in_user
   before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only:  :destroy
+
+  skip_before_action :verify_authenticity_token
   def index
-    @user = User.all
+    @users = User.paginate(page: params[:page], per_page: 12)
+    #phương thức paginate được cung cấp bởi gem phân trang, cho phép chia kết quả truy vấn thành các trang.
+    #page: params[:page]: Đọc trang hiện tại từ tham số URL. Thường là một số nguyên chỉ định trang hiện tại.
+    #per_page: 10: Chỉ định số lượng bản ghi hiển thị trên mỗi trang. Trong trường hợp này, là 10 bản ghi trên mỗi trang.
+
   end
   def new
     @user = User.new
@@ -38,6 +45,19 @@ class UsersController < ApplicationController
        end
   end
 
+ def destroy
+    respond_to do |format|
+      user = User.find_by(id: params[:user_id_delete])
+      user.destroy if user
+      format.js
+    end
+  end
+
+
+  private
+
+
+
 
   private
 
@@ -51,9 +71,12 @@ class UsersController < ApplicationController
 
 
   def correct_user
-    @user = User.find(params[:id])
-    redirect_to(root_url) unless @user == current_user
+    @user = User.find(params[:id]) #user mà mình đã đăng nhập và muốn sửa nó
+    redirect_to(root_url) unless @user == current_user #chuyển hướng tới root nếu ng dùng hiện tại ko phải là user mà mình đã đăng nhập
     end
 
+  def admin_user
+      redirect_to(root_url) unless current_user.admin?
+  end
 
 end

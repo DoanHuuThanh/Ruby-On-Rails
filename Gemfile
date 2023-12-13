@@ -90,3 +90,12 @@ gem "jsbundling-rails", "~> 1.2"
 gem "tailwindcss-rails", "~> 2.0"
 
 gem 'pry-rails', :group => :development
+
+gem 'faker'
+
+gem 'will_paginate', '~> 4.0'
+
+gem 'sass-rails'
+
+
+gem 'jquery-rails'

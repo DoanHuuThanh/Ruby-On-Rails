@@ -1,27 +1,26 @@
-<% provide(:title, "Get All") %>
+<% provide(:title, 'All users') %>
 
+<div class="container mx-auto my-8">
+  <h1 class="text-4xl font-bold mb-8 text-center text-gray-800">All Users</h1>
 
-    <div class="orelative overflow-x-auto">
-      <table class="min-w-full border text-center text-sm font-light dark:border-neutral-500">
-        <thead class="border-b font-medium dark:border-neutral-500">
-          <tr>
-            <th scope="col"
-                class="border-r px-6 py-4 dark:border-neutral-500">
-                    Name
-                </th>
-            <th scope="col"
-                class="border-r px-6 py-4 dark:border-neutral-500">
-                   Email
-                </th>
-          </tr>
-        </thead>
-        <tbody >
-          <% @user.each do |user| %>
-            <tr class="border-b dark:border-neutral-500">
-              <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500"><%= user.name %></td>
-              <td class="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500"><%= user.email %></td>
-            </tr>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <% @users.each do |user| %>
+      <div class="bg-gray-200 p-6 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105" id="user_<%=user.id%>" style="z-index:-1"> 
+        <%= gravatar_for user, size: 50, class: "mb-4 mx-auto rounded-full" %>
+        <div class="text-center">
+          <%= link_to user.name, user, class: "text-blue-600 hover:underline font-semibold block mb-2" %>
+          
+          <% if current_user.admin? && !current_user?(user) %>
+          <!-- Trong HTML hoặc ERB view -->
+                <button class="delete-user-button" id="user_<%=user.id%>" data-user-id="<%=user.id%>">Delete</button> 
+         <!--$(".delete-user-button").data('user-id') để lấy ra giá trị-->
           <% end %>
-        </tbody>
-      </table>
-    </div>
+        </div>
+      </div>  
+    <% end %>
+  </div>
+
+  <div class="flex justify-center mt-8">
+    <%= will_paginate %>
+  </div>
+</div>

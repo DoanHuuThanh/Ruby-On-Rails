@@ -15,6 +15,10 @@ module SessionsHelper
     end
   end
 
+  def current_user? user
+       user && user == current_user
+  end
+
   def logged_in?
     !current_user.nil?
   end
@@ -42,10 +46,19 @@ end
 
 def logged_in_user
   unless logged_in?
+    store_location
     flash[:danger]  = "please log in."
     redirect_to login_path
   end
 
 end
+
+
+def store_location
+   session[:forwarding_url] = request.original_url if request.get?
+
+end
+
+
 
 end

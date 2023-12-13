@@ -16,16 +16,6 @@
         <%= f.email_field :email, class: 'w-full p-2 border rounded-md focus:outline-none focus:border-blue-500' %>
       </div>
       
-         <div class="mb-4">
-        <%= f.label :password, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-        <%= f.password_field :password, class: 'w-full p-2 border rounded-md focus:outline-none focus:border-blue-500' %>
-      </div>
-
-      <div class="mb-4">
-        <%= f.label :password_confirmation, "Confirmation", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-        <%= f.password_field :password_confirmation, class: 'w-full p-2 border rounded-md focus:outline-none focus:border-blue-500' %>
-      </div>
-
       <%= f.submit "Save changes", class: "w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800" %>
     <% end %>
 

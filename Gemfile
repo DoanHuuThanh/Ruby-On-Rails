@@ -99,3 +99,5 @@ gem 'sass-rails'
 
 
 gem 'jquery-rails'
+
+gem 'devise'

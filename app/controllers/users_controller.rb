@@ -3,14 +3,15 @@ class UsersController < ApplicationController
                                                         # hãy gọi phương thức logged_in_user
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only:  :destroy
+ #  Các hành động xử lý yêu cầu từ API dùng skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token #Rails sẽ không kiểm tra CSRF token cho các hành động trong controller đó.
 
-  skip_before_action :verify_authenticity_token
   def index
     @users = User.paginate(page: params[:page], per_page: 12)
     #phương thức paginate được cung cấp bởi gem phân trang, cho phép chia kết quả truy vấn thành các trang.
     #page: params[:page]: Đọc trang hiện tại từ tham số URL. Thường là một số nguyên chỉ định trang hiện tại.
     #per_page: 10: Chỉ định số lượng bản ghi hiển thị trên mỗi trang. Trong trường hợp này, là 10 bản ghi trên mỗi trang.
-
+    @nam = "aasdasdadsadads"
   end
   def new
     @user = User.new
@@ -26,9 +27,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      reset_session # đầu tiên phải để sesion trở về rỗng ko có j cả
-      log_in @user # tạo và đăng nhập luôn bằng tài khoản vừa tạo
-        flash[:success] = "User created successfully"
+        @user.send_activation_email
+        flash[:success] = "Please check your email address for avtivate your account"
         redirect_to @user
      else
          render 'new'
@@ -55,9 +55,6 @@ class UsersController < ApplicationController
 
 
   private
-
-
-
 
   private
 

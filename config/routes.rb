@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+  get 'password_resets/edit'
   root 'static_pages#home'
   get '/home', to: 'static_pages#home'
   get '/help', to: 'static_pages#help', as: 'help'
@@ -8,8 +10,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   resources :users
-
-  resource :account_activations, only: edit
+  #Thông qua tùy chọn only,hỉ muốn định nghĩa hành động edit cho tài nguyên này.chỉ có một route và một action là edit sẽ được tạo ra để xử lý việc chỉnh sửa thông tin của tài khoản kích hoạt.
+  resources :account_activations, only: :edit
+  resources :password_resets, only: [:create, :new, :update, :edit]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

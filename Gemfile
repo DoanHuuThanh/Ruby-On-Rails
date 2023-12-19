@@ -68,6 +68,7 @@ end
 
 group :test do
   gem 'minitest-reporters'
+  gem 'rspec-rails'
 end
 
 group :development, :test do
@@ -101,3 +102,8 @@ gem 'sass-rails'
 gem 'jquery-rails'
 
 gem 'devise'
+
+gem 'active_storage_validations'
+
+# cài đặt imagemagick để sử dụng 2 gem dưới
+# sudo apt-get -y install imagemagick

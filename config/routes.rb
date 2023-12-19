@@ -9,11 +9,17 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
-  resources :users
+  resources :users do
+     member do
+       get :following, :followers
+     end
+  end
+
   #Thông qua tùy chọn only,hỉ muốn định nghĩa hành động edit cho tài nguyên này.chỉ có một route và một action là edit sẽ được tạo ra để xử lý việc chỉnh sửa thông tin của tài khoản kích hoạt.
   resources :account_activations, only: :edit
   resources :password_resets, only: [:create, :new, :update, :edit]
-
+  resources :microposts, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

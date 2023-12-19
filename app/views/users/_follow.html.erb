@@ -1,0 +1,6 @@
+<%= form_with(model: current_user.active_relationships.build, local: true) do |f| %>
+  <div class="mt-4">
+    <%= hidden_field_tag :followed_id, @user.id %>
+    <%= f.submit "Follow", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+  </div>
+<% end %>

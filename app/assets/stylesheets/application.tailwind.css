@@ -68,21 +68,58 @@ h1 {
   font-size: 100px ;
 }
 
-
-
-
-
-
-
-h1 {
-  font-size: 100px;
-}
-
 #login {
     height: 50px;
 }
 header {
   z-index: 2;
+}
+
+
+
+/* Reset some default styles for list items */
+ul, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style for each micropost item */
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #ddd; /* Optional: Add a border between microposts */
+}
+
+/* Style for the gravatar image */
+li img {
+  margin-right: 1rem;
+  border-radius: 50%;
+}
+
+/* Style for the user name */
+.user a {
+  font-weight: bold;
+  color: #3498db; /* Blue color */
+  text-decoration: none;
+}
+
+.user a:hover {
+  text-decoration: underline;
+}
+
+/* Style for the content text */
+.content {
+  color: #333; /* Dark gray color */
+  display: block; /* Add this line to make it a block element */
+}
+
+/* Style for the timestamp */
+.timestamp {
+  color: #888; /* Light gray color */
+  display: block; /* Add this line to make it a block element */
 }
 
 

@@ -77,6 +77,9 @@ Rails.application.configure do
   port: 1025,
   }
 
+  config.active_storage.variant_processor = true
+
+
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

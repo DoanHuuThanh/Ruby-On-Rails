@@ -1,7 +1,43 @@
-<%provide(:title,"Home")%>
-<h1>Sample App</h1>
-<p>
-This is the home page for the
-<a href="https://www.railstutorial.org/">Ruby on Rails Tutorial</a>
-sample application.
-</p>
+<% provide(:title, "Home") %>
+
+<% if logged_in? %>
+  <div class="container mx-auto mt-8">
+    <div class="flex justify-center">
+      <div class="w-full md:w-1/2 flex">
+        <div class="w-1/2 pr-4">
+          <section class="user_info">
+            <%= render 'shared/user_info' %>
+          </section>
+        </div>
+       <div class="w-full md:w-1/2 pl-4 mt-4 md:mt-0"> <!-- Add mt-4 to create space between sections on small screens -->
+    <section class="micropost_form">
+      <%= render 'shared/stat' %>
+    </section>
+  </div>
+
+        <div class="w-1/2 pl-4">
+          <section class="micropost_form">
+            <%= render 'shared/microposts_form' %>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:col-span-2 mt-8">
+      <h3 class="text-2xl font-bold mb-4">Micropost Feed</h3>
+      <%= render 'shared/feed' %> 
+    </div>
+  </div>
+<% else %>
+  <div class="flex items-center justify-center h-screen">
+    <div class="text-center">
+      <h1 class="text-4xl font-bold mb-4">Welcome to the Sample App</h1>
+      <h2 class="text-lg mb-6">
+        This is the home page for the
+        <a href="https://www.railstutorial.org/" class="text-blue-500 hover:underline">Ruby on Rails Tutorial</a>
+        sample application.
+      </h2>
+      <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+    </div>
+  </div>
+<% end %>

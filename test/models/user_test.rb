@@ -23,4 +23,13 @@ class UserTest < ActiveSupport::TestCase
     test "email should not be regex " do
       assert @user.valid?, "#{@user.email} should be valid"
     end
+
+    test "associated microposts should be destroyed" do
+        @user.save
+        @user.microposts.create(content: "hahaa")
+        assert_difference 'Micropost.count',-1 do
+            @user.destroy
+        end
+    end
+
 end

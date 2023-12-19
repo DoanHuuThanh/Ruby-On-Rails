@@ -1,0 +1,19 @@
+<li id="micropost-<%= micropost.id %>" class="flex items-center justify-between mb-4 border-b border-gray-300 py-4">
+  <%= link_to gravatar_for(micropost.user, size: 40), micropost.user, class: "mr-4 rounded-full" %>
+  <div class="flex-grow">
+    <span class="user">
+      <%= link_to micropost.user.name, micropost.user, class: "font-bold text-blue-500 hover:underline" %>
+    </span>
+    <span class="content text-gray-800 block mb-2">
+      <%= micropost.content %>
+      <%= image_tag micropost.image, class: "mt-2 rounded-md w-20 h-20 object-cover" if micropost.image.attached? %> 
+         <!--micropost.image.attached? sẽ trả về true nếu có ảnh đính kèm và false nếu không có-->
+    </span>
+    <span class="timestamp text-gray-500">
+      Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+    </span>
+    <button class="delete-mic-button mt-2 text-sm text-red-500 hover:text-red-700 focus:outline-none focus:underline" id="micropost_<%= micropost.id %>" data-mic-id="<%= micropost.id %>">
+      Delete
+    </button> 
+  </div>
+</li>

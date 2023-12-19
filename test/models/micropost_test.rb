@@ -3,7 +3,7 @@ require "test_helper"
 class MicropostTest < ActiveSupport::TestCase
  def setup
       @user = users(:michael)
-      @microposts = Micropost.new(content: "lorem", user_id: @user.id)
+      @microposts = @user.microposts.create(content: "lorem", user_id: @user.id)
  end
 
    test "should be valid" do
@@ -24,4 +24,6 @@ class MicropostTest < ActiveSupport::TestCase
       @microposts.content = "a" * 3000
       assert_not @microposts.valid?
       end
+
+
 end

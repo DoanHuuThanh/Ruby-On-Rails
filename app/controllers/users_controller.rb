@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :index, :destroy] # trc khi thực hiện các hành động edit,update trong controller,
+  before_action :logged_in_user, only: [:edit, :update, :index, :destroy,:following,:followers] # trc khi thực hiện các hành động edit,update trong controller,
                                                         # hãy gọi phương thức logged_in_user
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only:  :destroy
@@ -11,14 +11,30 @@ class UsersController < ApplicationController
     #phương thức paginate được cung cấp bởi gem phân trang, cho phép chia kết quả truy vấn thành các trang.
     #page: params[:page]: Đọc trang hiện tại từ tham số URL. Thường là một số nguyên chỉ định trang hiện tại.
     #per_page: 10: Chỉ định số lượng bản ghi hiển thị trên mỗi trang. Trong trường hợp này, là 10 bản ghi trên mỗi trang.
-    @nam = "aasdasdadsadads"
+
   end
   def new
     @user = User.new
   end
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
+
+   def following
+          @title = "Following"
+          @user = User.find_by(id: params[:id])
+          @users = @user.following.paginate(page: params[:page])
+          render 'show_follow'
+   end
+
+   def followers
+        @title ="Follower"
+        @user = User.find_by(id: params[:id])
+        @users = @user.followers.paginate(page: params[:page])
+        render 'show_follow'
+   end
+
   def edit
     @user = User.find(params[:id])
   end

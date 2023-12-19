@@ -7,7 +7,7 @@
     <%= form_with(model: @user, url: password_reset_path(params[:id]), local: true) do |f| %> 
     <!--neu su dung model: @user thi params se la params[:user] con khong co mac dinh la params[controller]-->
     <!--cos them url de gui den 1 duong dan cu the o day la gui den ham update cua controller password_resets-->
-      <%= render 'shared/error_messages' %>
+      <%= render 'shared/error_messages', object: f.object %>
       <%= hidden_field_tag :email, @user.email %> <!--tao ra 1 input an ko  lien quan toi -->
 
       <div class="mb-4">

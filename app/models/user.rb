@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: {maximum:200, minium:6}, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i},uniqueness: {case_sensitive: false}
   #uniqueness la duy nhat ko duoc trung lap,case_sensitive: false mang ý nghĩa ko phân biệt in hoa in thường
   has_secure_password
-  validates :password, presence: true, length: {maximum:30, minium:3}, allow_nil: true
+  validates :password, presence: true, length: {maximum:200, minium:3}, allow_nil: true
   #khi bạn sử dụng has_secure_password trong model, bạn có thể sử dụng cặp thuộc
   #tính password và password_confirmation để xác nhận mật khẩu người dùng khi tạo hoặc cập nhật tài khoản.
   #tự thêm phương thức authenticate để xác thực ng dùng user.authenticate
@@ -104,5 +104,19 @@ class User < ApplicationRecord
 
     def following?(other_user)
        following.include?(other_user)
+    end
+
+    def self.from_omniauth(auth)
+      password = User.new_token
+      where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.name = auth.info.name
+        user.password = User.digest(password)
+        user.email = auth.info.email
+        user.oauth_token = auth.credentials.token
+        user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+        user.save!
+      end
     end
 end

@@ -20,6 +20,14 @@ class SessionsController < ApplicationController
         flash.now[:danger] = "Invalid email/password combination"
         render 'new'
   end
+  end
+
+  def login_with_google
+    user = User.from_omniauth(request.env['omniauth.auth'])
+    log_in user
+    remember(user)
+    redirect_to root_path
+
 end
 
 def destroy

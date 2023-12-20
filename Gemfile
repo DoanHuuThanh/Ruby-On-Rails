@@ -107,3 +107,4 @@ gem 'active_storage_validations'
 
 # cài đặt imagemagick để sử dụng 2 gem dưới
 # sudo apt-get -y install imagemagick
+gem 'omniauth-google-oauth2'

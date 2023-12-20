@@ -6,14 +6,17 @@ Rails.application.routes.draw do
   get '/help', to: 'static_pages#help', as: 'help'
   get '/about', to: 'static_pages#about', as: 'about'
   get '/signup', to:  'users#new'
-  get 'login', to: 'sessions#new'
+  get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
-  get '/logout', to: 'sessions#destroy'
+
   resources :users do
      member do
        get :following, :followers
      end
   end
+  get 'auth/:provider/callback', to: 'sessions#login_with_google'
+  get 'auth/failure', to: redirect('/')
+  get '/logout', to: 'sessions#destroy'
 
   #Thông qua tùy chọn only,hỉ muốn định nghĩa hành động edit cho tài nguyên này.chỉ có một route và một action là edit sẽ được tạo ra để xử lý việc chỉnh sửa thông tin của tài khoản kích hoạt.
   resources :account_activations, only: :edit

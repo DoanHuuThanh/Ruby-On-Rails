@@ -79,6 +79,7 @@ Rails.application.configure do
 
   config.active_storage.variant_processor = true
 
+  OmniAuth.config.silence_get_warning = true
 
 
   # Raises error for missing translations.

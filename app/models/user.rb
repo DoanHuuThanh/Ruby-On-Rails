@@ -12,7 +12,7 @@ class User < ApplicationRecord
   #Dòng mã này nói rằng khi một đối tượng User mới được tạo và lưu vào cơ sở dữ liệu, Rails sẽ tự động gọi phương thức create_activation_digest trước khi thực hiện lưu trữ (create).
 
   validates :name,  presence: true, length: {maximum:200}
-  validates :email, presence: true, length: {maximum:200, minium:6}, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i},uniqueness: {case_sensitive: false}
+  validates :email, presence: true, length: {maximum:200, minium:6}, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i},uniqueness: {case_sensitive: false},allow_nil:true
   #uniqueness la duy nhat ko duoc trung lap,case_sensitive: false mang ý nghĩa ko phân biệt in hoa in thường
   has_secure_password
   validates :password, presence: true, length: {maximum:200, minium:3}, allow_nil: true
@@ -53,7 +53,7 @@ class User < ApplicationRecord
 
    #chuyển email thành chữ thg
   def downcase_email
-    self.email = email.downcase
+    self.email = email.downcase if email?
   end
   def default_activated
       self.activated = false
@@ -115,7 +115,7 @@ class User < ApplicationRecord
         user.password = User.digest(password)
         user.email = auth.info.email
         user.oauth_token = auth.credentials.token
-        user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+
         user.save!
       end
     end

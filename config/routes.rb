@@ -14,7 +14,8 @@ Rails.application.routes.draw do
        get :following, :followers
      end
   end
-  get 'auth/:provider/callback', to: 'sessions#login_with_google'
+  get 'auth/:provider/callback', to: 'sessions#login_with_third_party'
+
   get 'auth/failure', to: redirect('/')
   get '/logout', to: 'sessions#destroy'
 

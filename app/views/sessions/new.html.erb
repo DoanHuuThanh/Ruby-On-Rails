@@ -26,5 +26,8 @@
     <%= link_to "Forgot password", password_resets_new_path, class: "block text-blue-500 hover:underline text-sm mt-2" %>
 
     <p class="mt-4 text-center text-gray-600">New user? <%= link_to "Sign up now!", signup_path, class: "text-blue-500 hover:underline" %></p>
+     <%= link_to image_tag("sigin_gg.png"), "/auth/google_oauth2", id: "sign_in" %>
+      <%= link_to image_tag("github.png"), "/auth/github", id: "sign_in" %>
+      <%= link_to image_tag("fb2.png"), "/auth/facebook", id: "sign_in" %>
   </div>
 </div>

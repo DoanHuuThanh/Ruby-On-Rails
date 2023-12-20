@@ -21,9 +21,17 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy
-    log_out if logged_in?
-    redirect_to login_path
+  def login_with_third_party
+    user = User.from_omniauth(request.env['omniauth.auth'])
+    log_in user
+    remember(user)
+    redirect_to root_path
+end
+
+
+def destroy
+  log_out if logged_in?
+  redirect_to login_path
   end
 
   def friendly_forward_or(_user)

@@ -12,10 +12,9 @@ class User < ApplicationRecord
   before_create :default_activated
   # Dòng mã này nói rằng khi một đối tượng User mới được tạo và lưu vào cơ sở dữ liệu, Rails sẽ tự động gọi phương thức create_activation_digest trước khi thực hiện lưu trữ (create).
 
-  validates :name,  presence: true, length: { maximum: 200 }
-  validates :email, presence: true, length: { maximum: 200, minium: 6 },
-                    format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: { case_sensitive: false }
-  # uniqueness la duy nhat ko duoc trung lap,case_sensitive: false mang ý nghĩa ko phân biệt in hoa in thường
+  validates :name,  presence: true, length: {maximum:200}
+  validates :email, presence: true, length: {maximum:200, minium:6}, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i},uniqueness: {case_sensitive: false},allow_nil:true
+  #uniqueness la duy nhat ko duoc trung lap,case_sensitive: false mang ý nghĩa ko phân biệt in hoa in thường
   has_secure_password
   validates :password, presence: true, length: { maximum: 30, minium: 3 }, allow_nil: true
   # khi bạn sử dụng has_secure_password trong model, bạn có thể sử dụng cặp thuộc
@@ -56,7 +55,7 @@ class User < ApplicationRecord
 
   # chuyển email thành chữ thg
   def downcase_email
-    self.email = email.downcase
+    self.email = email.downcase if email?
   end
 
   def default_activated
@@ -106,7 +105,21 @@ class User < ApplicationRecord
     following.delete(other_user)
   end
 
-  def following?(other_user)
-    following.include?(other_user)
-  end
+    def following?(other_user)
+       following.include?(other_user)
+    end
+
+    def self.from_omniauth(auth)
+      password = User.new_token
+      where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.name = auth.info.name
+        user.password = User.digest(password)
+        user.email = auth.info.email
+        user.oauth_token = auth.credentials.token
+
+        user.save!
+      end
+    end
 end

@@ -78,6 +78,7 @@ end
 
 group :development, :test do
   gem 'openssl'
+  gem 'factory_bot_rails'
 end
 
 gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
@@ -105,3 +106,8 @@ gem 'active_storage_validations'
 
 # cài đặt imagemagick để sử dụng 2 gem dưới
 # sudo apt-get -y install imagemagick
+gem 'omniauth-google-oauth2'
+
+gem 'omniauth-github', '~> 2.0.0'
+
+gem 'omniauth-facebook'

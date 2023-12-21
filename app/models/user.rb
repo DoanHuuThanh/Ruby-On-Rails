@@ -111,6 +111,8 @@ class User < ApplicationRecord
 
     def self.from_omniauth(auth)
       password = User.new_token
+      #first_or_initialize ktra xem trong csdl thỏa man dieu kien hay ko neu co trả về bản ghi ko co se tao 1 ban ghi moi voi các
+      #giá trị cung cấp vd: nếu provider và uid ko có nó sẽ tạo 1 bản ghi mới có giá trị mới là provider và uid tg ứng
       where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
         user.provider = auth.provider
         user.uid = auth.uid
@@ -118,7 +120,7 @@ class User < ApplicationRecord
         user.password = User.digest(password)
         user.email = auth.info.email
         user.oauth_token = auth.credentials.token
-
+           binding.pry
         user.save!
       end
     end

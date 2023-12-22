@@ -64,12 +64,12 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-FactoryBot::SyntaxRunner.class_eval do
-  include RSpec::Mocks::ExampleMethods
-end
+  FactoryBot::SyntaxRunner.class_eval do
+    include RSpec::Mocks::ExampleMethods
+  end
 
-RSpec.configure do |config|
-  config.include FactoryBot::Syntax::Methods
-  # Other configurations...
-end
+  RSpec.configure do |config|
+    config.include FactoryBot::Syntax::Methods
+    # Other configurations...
+  end
 end

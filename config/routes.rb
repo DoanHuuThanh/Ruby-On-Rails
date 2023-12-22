@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
 
   resources :users do
-     member do
-       get :following, :followers
-     end
+    member do
+      get :following, :followers
+    end
   end
   get 'auth/:provider/callback', to: 'sessions#login_with_third_party'
 

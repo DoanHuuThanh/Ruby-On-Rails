@@ -23,16 +23,15 @@ class SessionsController < ApplicationController
 
   def login_with_third_party
     user = User.from_omniauth(request.env['omniauth.auth'])
-    #request.env['omniauth.auth'] là một biến trong Rails chứa thông tin về người dùng được trả về từ quá trình xác thực OAuth thông qua OmniAuth.
+    # request.env['omniauth.auth'] là một biến trong Rails chứa thông tin về người dùng được trả về từ quá trình xác thực OAuth thông qua OmniAuth.
     log_in user
     remember(user)
     redirect_to root_path
-end
+  end
 
-
-def destroy
-  log_out if logged_in?
-  redirect_to login_path
+  def destroy
+    log_out if logged_in?
+    redirect_to login_path
   end
 
   def friendly_forward_or(_user)

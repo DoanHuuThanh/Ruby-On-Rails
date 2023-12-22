@@ -77,8 +77,8 @@ group :development, :test do
 end
 
 group :development, :test do
-  gem 'openssl'
   gem 'factory_bot_rails'
+  gem 'openssl'
 end
 
 gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'

@@ -1,7 +1,7 @@
-ENV["RAILS_ENV"] ||= "test"
-require_relative "../config/environment"
-require "rails/test_help"
-require "minitest/reporters"
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
+require 'rails/test_help'
+require 'minitest/reporters'
 Minitest::Reporters.use!
 module ActiveSupport
   class TestCase
@@ -16,10 +16,9 @@ module ActiveSupport
       !session[:user_id].nil?
     end
 
-    def log_in_as(user,password: 'password', remember_me: '1')
-      post login_path, params: {session: {email: user.email, password: password, remember_me: remember_me}}
+    def log_in_as(user, password: 'password', remember_me: '1')
+      post login_path, params: { session: { email: user.email, password:, remember_me: } }
     end
-
 
     # Add more helper methods to be used by all tests here...
   end

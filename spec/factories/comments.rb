@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :comment do
     content { "MyText" }
-    micropost { nil }
     user { nil }
+    micropost { nil }
+    parent_id { 1 }
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_26_060457) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_26_150028) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -41,12 +41,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_060457) do
 
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "content"
-    t.bigint "micropost_id", null: false
     t.bigint "user_id", null: false
+    t.bigint "micropost_id", null: false
+    t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["micropost_id"], name: "index_comments_on_micropost_id"
-    t.index ["user_id", "created_at", "micropost_id"], name: "index_comments_on_user_id_and_created_at_and_micropost_id"
+    t.index ["parent_id"], name: "index_comments_on_parent_id"
+    t.index ["user_id", "micropost_id", "created_at"], name: "index_comments_on_user_id_and_micropost_id_and_created_at", unique: true
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -67,16 +69,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_060457) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
-  end
-
-  create_table "replies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.text "content"
-    t.bigint "user_id", null: false
-    t.bigint "comment_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["comment_id"], name: "index_replies_on_comment_id"
-    t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -104,6 +96,4 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_060457) do
   add_foreign_key "comments", "microposts"
   add_foreign_key "comments", "users"
   add_foreign_key "microposts", "users"
-  add_foreign_key "replies", "comments"
-  add_foreign_key "replies", "users"
 end

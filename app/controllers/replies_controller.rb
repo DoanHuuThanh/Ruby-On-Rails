@@ -2,24 +2,24 @@ class RepliesController < ApplicationController
 
   skip_before_action :verify_authenticity_token
   def create
-    @comment = Comment.find_by(id: params[:comment_id])
-    @reply = @comment.replies.build(reply_params)
-    @reply.image.attach(params[:reply][:image])
+    @comment = Comment.find_by(id: params[:parent_id])
+    @reply = @comment.replies.build(content: params[:comment][:content],parent_id: params[:parent_id], micropost_id: params[:micropost_id])
     @reply.user = current_user
-
     if @reply.save
       flash[:success] = 'Comment created!'
       redirect_to root_path
     else
       @feed_items = current_user.feed.paginate(page: params[:page], per_page: 6)
       flash[:error] = 'Error creating comment'
+      binding.pry
       render 'static_pages/home'
     end
 
   end
 
   def update
-    @reply = Reply.find(params[:reply_id])
+    @comment = Comment.find_by(id: params[:parent_id])
+    @reply = @comment.replies.find(params[:parent_id])
 
     if @reply.update(reply_params)
       flash[:success] = 'Comment updated!'
@@ -31,9 +31,11 @@ class RepliesController < ApplicationController
     end
   end
 
+  #not fixed yet
   def destroy
     respond_to do |format|
-      reply = Reply.find_by(id: params[:reply_id])
+      comment = Comment.find_by(id: params[:parent_id])
+      reply = comment.find_by(id: params[:reply_id])
       reply.destroy
       format.js
     end
@@ -42,7 +44,7 @@ class RepliesController < ApplicationController
   private
 
   def reply_params
-    params.require(:reply).permit(:content, :comment_id, :image )
+    params.require(:comment).permit(:content)
   end
 
 end

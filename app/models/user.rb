@@ -2,6 +2,7 @@ class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
 
   has_many :microposts, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
   has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
@@ -14,7 +15,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 200, minium: 6 },
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: { case_sensitive: false }, allow_nil: true
   has_secure_password
-  validates :password, presence: true, length: { maximum: 30, minium: 3 }, allow_nil: true
+  validates :password, presence: true, length: { maximum: 100, minium: 3 }, allow_nil: true
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost

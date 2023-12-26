@@ -40,8 +40,27 @@ $(document).ready(function () {
          type: 'DELETE',
          data: {user_id: user_uf}   
          })
-         
-       
+    })
+
+
+    $('.delete-comment').on('click', function(){ 
+      var comment_uf = $(this).data('comment-id') 
+
+         $.ajax({
+         url: '/comments/destroy',
+         type: 'DELETE',
+         data: {comment_id: comment_uf}   
+         })
+    })
+
+    $('.delete-reply').on('click', function(){ 
+      var reply_uf = $(this).data('reply-id') 
+
+         $.ajax({
+         url: '/replies/destroy',
+         type: 'DELETE',
+         data: {reply_id: reply_uf}   
+         })
     })
 
     $("#micropost_image").on("change", function(){ 
@@ -60,6 +79,31 @@ $(document).ready(function () {
 
   
   })
-   
- 
+
+
+  function show(elementClass, elementIdPrefix, element) {
+    document.addEventListener('DOMContentLoaded', function() {
+      var feedbackButtons = document.querySelectorAll(elementClass);
+      feedbackButtons.forEach(function(feedbackButton) {
+        feedbackButton.addEventListener('click', function() {
+          var commentId = this.id.split('-')[1];
+  
+          var formToDisplay = document.getElementById(elementIdPrefix + commentId);
+          if (formToDisplay) {
+            var allForms = document.querySelectorAll(element);
+  
+            allForms.forEach(function(form) {
+              form.style.display = 'none';
+            });
+  
+            formToDisplay.style.display = 'block';
+          }
+        });
+      });
+    });
+  }
+  
+  show('.feedback', 'form-reply-', '.form-reply');
+  show('.edit-reply', 'form-reply-edit-', '.form-reply-edit');
+  show('.edit-comment', 'form-comment-', '.form-edit');
   

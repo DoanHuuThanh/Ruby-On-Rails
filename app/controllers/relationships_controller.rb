@@ -10,7 +10,6 @@ class RelationshipsController < ApplicationController
     respond_to do |format|
       user = Relationship.find_by(followed_id: params[:user_id]).followed
       current_user.unfollow(user)
-      format.html { redirect_to user }
       format.js
     end
   end

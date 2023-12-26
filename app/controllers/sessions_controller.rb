@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
     redirect_to login_path
   end
 
-  def friendly_forward_or(_user)
+  def friendly_forward_or(user)
     if session[:forwarding_url]
 
       redirect_to session[:forwarding_url]

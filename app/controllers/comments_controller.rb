@@ -2,8 +2,7 @@ class CommentsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def create
     @micropost = Micropost.find_by(id: params[:micropost_id])
-    @comment = @micropost.comments.build(comment_params)
-    @comment.image.attach(params[:comment][:image])
+    @comment = @micropost.comments.build(content_comment: params[:micropost][:content_comment], parent_comment_id: params[:parent_comment_id])
     @comment.user = current_user
 
     if @comment.save
@@ -18,9 +17,9 @@ class CommentsController < ApplicationController
   end
 
   def update
-    @comment = Comment.find(params[:comment_id])
-
-    if @comment.update(comment_params)
+    @micropost = Micropost.find_by(id: params[:micropost_id])
+    @comment =@micropost.comments.find_by(id: params[:id])
+    if @comment.update(content_comment: params[:micropost][:content_comment])
       flash[:success] = 'Comment updated!'
       redirect_to root_path
     else
@@ -41,6 +40,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:content, :micropost_id, :image )
+    params.require(:micopost).permit(:content, :image )
   end
 end

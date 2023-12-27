@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_26_150028) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_27_033733) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -57,6 +57,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_150028) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "parent_comment_id"
+    t.integer "parent_comply_id"
+    t.text "content_comment"
+    t.index ["parent_comment_id"], name: "index_microposts_on_parent_comment_id"
+    t.index ["parent_comply_id", "parent_comment_id"], name: "index_microposts_on_parent_comply_id_and_parent_comment_id", unique: true
+    t.index ["parent_comply_id"], name: "index_microposts_on_parent_comply_id"
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end

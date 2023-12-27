@@ -2,8 +2,7 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :micropost
   belongs_to :parent, class_name: 'Comment', optional: true
-  has_many :create_reply, class_name: 'Comment', foreign_key: 'parent_id', dependent: :destroy
-  has_many :replies, through: :create_reply, source: :parent
+  has_many :replies, class_name: 'Comment', foreign_key: 'parent_id', dependent: :destroy
   has_one_attached :image
   default_scope -> { order(created_at: :desc) }
   validates :image, content_type: {

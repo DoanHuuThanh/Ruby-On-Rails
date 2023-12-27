@@ -11,7 +11,6 @@ class RepliesController < ApplicationController
     else
       @feed_items = current_user.feed.paginate(page: params[:page], per_page: 6)
       flash[:error] = 'Error creating comment'
-      binding.pry
       render 'static_pages/home'
     end
 
@@ -19,7 +18,7 @@ class RepliesController < ApplicationController
 
   def update
     @comment = Comment.find_by(id: params[:parent_id])
-    @reply = @comment.replies.find(params[:parent_id])
+    @reply = @comment.replies.find(params[:reply_id])
 
     if @reply.update(reply_params)
       flash[:success] = 'Comment updated!'

@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# Controller PasswordResets
 class PasswordResetsController < ApplicationController
-  before_action :get_user, only: %i[edit update]
+  before_action :getuser, only: %i[edit update]
   before_action :valid_user, only: %i[edit update]
   before_action :check_expiration, only: %i[edit update]
   def new; end
@@ -39,12 +42,12 @@ class PasswordResetsController < ApplicationController
     params.require(:user).permit(:password, :password_confirmation)
   end
 
-  def get_user
+  def getuser
     @user = User.find_by(email: params[:email])
   end
 
   def valid_user
-    return if @user && @user.activated? && @user.authenticated?(:reset, params[:id])
+    return if @user&.activated? && @user&.authenticated?(:reset, params[:id])
 
     redirect_to root_path
   end

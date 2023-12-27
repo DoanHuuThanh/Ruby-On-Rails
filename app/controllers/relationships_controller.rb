@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Controller Relationship
 class RelationshipsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def create

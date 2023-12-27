@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Model Micropost
 class Micropost < ApplicationRecord
   belongs_to :user
   has_one_attached :image

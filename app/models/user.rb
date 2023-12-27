@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Model User
 class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
 

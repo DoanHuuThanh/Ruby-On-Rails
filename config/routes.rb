@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   get 'password_resets/new'
   get 'password_resets/edit'
@@ -24,7 +26,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # Thông qua tùy chọn only,hỉ muốn định nghĩa hành động edit cho tài nguyên này.chỉ có một route và một action là edit sẽ được tạo ra để xử lý việc chỉnh sửa thông tin của tài khoản kích hoạt.
   resources :account_activations, only: :edit
   resources :password_resets, only: %i[create new update edit]
   resources :microposts, only: %i[create destroy]

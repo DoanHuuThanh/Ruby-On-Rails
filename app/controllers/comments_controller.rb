@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
+# Controller Comments
 class CommentsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def create
     @micropost = Micropost.find_by(id: params[:micropost_id])
-    @comment = @micropost.comments.build(content_comment: params[:micropost][:content_comment], parent_comment_id: params[:parent_comment_id])
+    @comment = @micropost.comments.build(content_comment: params[:micropost][:content_comment],
+                                         parent_comment_id: params[:parent_comment_id])
     @comment.user = current_user
 
     if @comment.save
@@ -13,12 +17,11 @@ class CommentsController < ApplicationController
       flash[:error] = 'Error creating comment'
       render 'static_pages/home'
     end
-
   end
 
   def update
     @micropost = Micropost.find_by(id: params[:micropost_id])
-    @comment =@micropost.comments.find_by(id: params[:id])
+    @comment = @micropost.comments.find_by(id: params[:id])
     if @comment.update(content_comment: params[:micropost][:content_comment])
       flash[:success] = 'Comment updated!'
       redirect_to root_path
@@ -40,6 +43,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:micopost).permit(:content, :image )
+    params.require(:micopost).permit(:content, :image)
   end
 end

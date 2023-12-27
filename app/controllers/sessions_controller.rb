@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
+# Controller Sessions
 class SessionsController < ApplicationController
   def new; end
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
+    if user&.authenticate(params[:session][:password])
       if user.activated?
         session.delete(:user_id)
         log_in user
@@ -23,7 +26,6 @@ class SessionsController < ApplicationController
 
   def login_with_third_party
     user = User.from_omniauth(request.env['omniauth.auth'])
-    # request.env['omniauth.auth'] là một biến trong Rails chứa thông tin về người dùng được trả về từ quá trình xác thực OAuth thông qua OmniAuth.
     log_in user
     remember(user)
     redirect_to root_path
@@ -34,7 +36,7 @@ class SessionsController < ApplicationController
     redirect_to login_path
   end
 
-  def friendly_forward_or(user)
+  def friendly_forward_or(_user)
     if session[:forwarding_url]
 
       redirect_to session[:forwarding_url]

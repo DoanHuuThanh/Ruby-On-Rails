@@ -14,7 +14,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 200, minium: 6 },
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: { case_sensitive: false }, allow_nil: true
   has_secure_password
-  validates :password, presence: true, length: { maximum: 30, minium: 3 }, allow_nil: true
+  validates :password, presence: true, length: { maximum: 100, minium: 3 }, allow_nil: true
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
@@ -97,12 +97,13 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
+     return unless auth.present?
     password = User.new_token
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name
-      user.password = User.digest(password)
+      user.password = User.digest(password) if password.present?
       user.email = auth.info.email
       user.oauth_token = auth.credentials.token
       user.save!

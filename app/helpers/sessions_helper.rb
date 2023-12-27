@@ -1,7 +1,7 @@
 module SessionsHelper
   # tạo session
   def log_in(user)
-    session[:user_id] = user.id
+    session[:user_id] = user.id if user.present?
   end
 
   # người dùng đăng nhập
@@ -29,9 +29,11 @@ module SessionsHelper
 
   # lưu ng dùng rên cookies
   def remember(user)
+    if user.present?
     user.remember
     cookies.permanent.encrypted[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
+    end
   end
 
   # xóa ng dùng khỏi cookies

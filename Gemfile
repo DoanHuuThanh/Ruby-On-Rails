@@ -79,6 +79,7 @@ end
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'openssl'
+  gem 'faker'
 end
 
 gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
@@ -91,8 +92,6 @@ gem 'jsbundling-rails', '~> 1.2'
 gem 'tailwindcss-rails', '~> 2.0'
 
 gem 'pry-rails', group: :development
-
-gem 'faker'
 
 gem 'will_paginate', '~> 4.0'
 
@@ -111,3 +110,5 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-github', '~> 2.0.0'
 
 gem 'omniauth-facebook'
+
+gem 'dotenv-rails'

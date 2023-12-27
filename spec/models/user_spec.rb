@@ -16,11 +16,11 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:user) { create(:user, activated: true) } # Assuming you have a FactoryBot factory for User
+    let(:user) { FactoryBot.create(:user) } # Assuming you have a FactoryBot factory for User
 
     context 'with valid credentials' do
       it 'redirects to the root path' do
-        post :create, params: { session: { email: user.email, password: '123' } }
+        post :create, params: { session: { email: user.email, password: user.password } }
         expect(response).to redirect_to(root_path)
       end
     end
@@ -40,13 +40,13 @@ RSpec.describe SessionsController, type: :controller do
     context 'when the user is not activated' do
       it 'sets a flash message' do
         user.update(activated: false)
-        post :create, params: { session: { email: user.email, password: '123' } }
+        post :create, params: { session: { email: user.email, password: user.password } }
         expect(flash[:warning]).to be_present
       end
 
       it 'redirects to the root path' do
         user.update(activated: false)
-        post :create, params: { session: { email: user.email, password: '123' } }
+        post :create, params: { session: { email: user.email, password: user.password } }
         expect(response).to redirect_to(root_path)
       end
     end
@@ -103,7 +103,7 @@ RSpec.describe SessionsController, type: :controller do
                                                                            }
                                                                          })
 
-      get :login_with_third_party
+      get :use_omniauth
 
       expect(response).to redirect_to(root_path)
     end

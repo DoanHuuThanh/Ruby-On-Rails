@@ -45,21 +45,29 @@ $(document).ready(function () {
 
     $('.delete-comment').on('click', function(){ 
       var comment_uf = $(this).data('comment-id') 
+      var micropost_uf = $(this).data('micropost-id')
 
          $.ajax({
          url: '/comments/destroy',
          type: 'DELETE',
-         data: {comment_id: comment_uf}   
+         data: {
+          comment_id: comment_uf,
+          micropost_id:micropost_uf
+        }   
          })
     })
 
     $('.delete-reply').on('click', function(){ 
       var reply_uf = $(this).data('reply-id') 
+      var comment_uf = $(this).data('comment-id')
 
          $.ajax({
          url: '/replies/destroy',
          type: 'DELETE',
-         data: {reply_id: reply_uf}   
+         data: {
+          reply_id: reply_uf,
+          comment_id: comment_uf
+        }   
          })
     })
 

@@ -1,6 +1,6 @@
 
 <!-- Micropost -->
-<%if(!micropost.parent_comment_id.present?)%>
+<%if(!micropost.parent_id.present?)%>
 <li id="micropost-<%= micropost.id %>" class="flex items-start justify-between mb-4 border-b border-gray-300 py-4">
   <%= link_to gravatar_for(micropost.user, size: 40), micropost.user, class: "mr-4 rounded-full" %>
   <div class="flex-grow">
@@ -23,18 +23,18 @@
 <!-- Comments -->
 <ul class="space-y-4">
   <% micropost.comments.each do |comment| %>
-  <%if comment.parent_comment_id.present?%>
+  <%if comment.parent_id.present?%>
     <div id="comment_<%=comment.id%>" class="flex items-start space-x-4">
       <%= link_to gravatar_for(comment.user, size: 40), comment.user, class: "rounded-full" %>
       <div class="flex-grow">
-        <p class="mb-1"><strong><%= comment.user.name %>:</strong> <%= comment.content_comment %></p>
+        <p class="mb-1"><strong><%= comment.user.name %>:</strong> <%= comment.content %></p>
         <%= image_tag comment.image, class: "mt-2 rounded-md w-20 h-20 object-cover" if comment.image.attached? %> 
         <span class="timestamp text-gray-500">
           Posted <%= time_ago_in_words(comment.created_at) %> ago.
         </span>
         <div class="flex items-center space-x-2">
           <p class="edit-comment cursor-pointer text-blue-500 hover:underline" id="comment-<%=comment.id%>">Edit</p>
-          <button class="delete-comment text-red-500 hover:text-red-700" id="comment-<%=comment.id%>" data-comment-id=<%=comment.id%>>Delete</button>
+          <button class="delete-comment text-red-500 hover:text-red-700" id="comment-<%=comment.id%>" data-micropost-id=<%=comment.parent_id%> data-comment-id=<%=comment.id%>>Delete</button>
           <p class="feedback cursor-pointer text-black-500 hover:underline" id="comment-<%=comment.id%>">FeedBack</p>
         </div>
 
@@ -51,7 +51,7 @@
                 </span>
                 <div class="flex items-center space-x-2">
                   <p class="edit-reply cursor-pointer text-blue-500 hover:underline" id="reply-<%=reply.id%>">Edit</p>
-                  <button class="delete-reply text-red-500 hover:text-red-700" id="reply-<%=reply.id%>" data-reply-id=<%=reply.id%>>Delete</button>
+                  <button class="delete-reply text-red-500 hover:text-red-700" id="reply-<%=reply.id%>" data-comment-id=<%=reply.parent_id%> data-reply-id=<%=reply.id%>>Delete</button>
                   <p class="feedback cursor-pointer text-black-500 hover:underline" id="reply-<%=comment.id%>">FeedBack</p>
                 </div>
                 <div class="form-reply-edit hidden " id="form-reply-edit-<%=reply.id%>">
@@ -71,6 +71,8 @@
           <div class="form-reply" id="form-reply-<%=comment.id%>">
             <%= form_with(model: comment.replies.build, url: replies_path) do |form| %>
               <%= render 'shared/error_messages', object: form.object %>
+              <%= hidden_field_tag :micropost_id, comment.parent_id %>
+              <%= hidden_field_tag :parent_id, comment.id%>
               <%= form.text_area :content, placeholder: 'Add a reply...', class: "w-full p-2 border rounded" %>
               <%= form.submit 'Post', class: "bg-blue-500 text-white font-bold py-2 px-4 rounded" %>
               <%= form.file_field :image %>
@@ -85,8 +87,8 @@
         <%= form_with(model: comment, url: comment_path(comment), method: :patch) do |form| %>
           <%= render 'shared/error_messages', object: form.object %>
           <%= hidden_field_tag :id, comment.id %>
-          <%= hidden_field_tag :micropost_id, comment.parent_comment_id %>
-          <%= form.text_area :content_comment, placeholder: 'Edit your comment...', class: "w-full p-2 border rounded" %>
+          <%= hidden_field_tag :micropost_id, comment.parent_id %>
+          <%= form.text_area :content, placeholder: 'Edit your comment...', class: "w-full p-2 border rounded" %>
           <%= form.submit 'Update', class: "bg-blue-500 text-white font-bold py-2 px-4 rounded" %>
         <% end %>
       </div>
@@ -99,8 +101,8 @@
 <%= form_with(model: micropost.comments.build, url: comments_path) do |form| %>
   <%= render 'shared/error_messages', object: form.object %>
   <%= hidden_field_tag :micropost_id, micropost.id %>
-  <%= hidden_field_tag :parent_comment_id, micropost.id %>
-  <%= form.text_area :content_comment, placeholder: 'Add a comment...', class: "w-full p-2 border rounded" %>
+  <%= hidden_field_tag :parent_id, micropost.id %>
+  <%= form.text_area :content, placeholder: 'Add a comment...', class: "w-full p-2 border rounded" %>
   <%= form.submit 'Post', class: "bg-blue-500 text-white font-bold py-2 px-4 rounded" %>
   <%= form.file_field :image %>
 <% end %>

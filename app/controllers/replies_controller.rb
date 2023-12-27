@@ -4,9 +4,8 @@
 class RepliesController < ApplicationController
   skip_before_action :verify_authenticity_token
   def create
-    @comment = Comment.find_by(id: params[:parent_id])
-    @reply = @comment.replies.build(content: params[:comment][:content], parent_id: params[:parent_id],
-                                    micropost_id: params[:micropost_id])
+    @comment = Micropost.find_by(id: params[:parent_id])
+    @reply = @comment.replies.build(content: params[:micropost][:content], parent_id: params[:parent_id])
     @reply.user = current_user
     if @reply.save
       flash[:success] = 'Comment created!'
@@ -19,7 +18,7 @@ class RepliesController < ApplicationController
   end
 
   def update
-    @comment = Comment.find_by(id: params[:parent_id])
+    @comment = Micropost.find_by(id: params[:parent_id])
     @reply = @comment.replies.find(params[:reply_id])
 
     if @reply.update(reply_params)
@@ -35,8 +34,8 @@ class RepliesController < ApplicationController
   # not fixed yet
   def destroy
     respond_to do |format|
-      comment = Comment.find_by(id: params[:parent_id])
-      reply = comment.find_by(id: params[:reply_id])
+      comment = Micropost.find_by(id: params[:comment_id])
+      reply = comment.replies.find(params[:reply_id])
       reply.destroy
       format.js
     end
@@ -45,6 +44,6 @@ class RepliesController < ApplicationController
   private
 
   def reply_params
-    params.require(:comment).permit(:content)
+    params.require(:micropost).permit(:content)
   end
 end

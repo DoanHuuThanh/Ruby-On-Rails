@@ -99,7 +99,7 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     return if auth.blank?
     password = User.new_token
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+    where(email: auth.info.email).first_or_initialize.tap do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.name = auth.info.name

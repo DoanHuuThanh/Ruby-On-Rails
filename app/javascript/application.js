@@ -45,29 +45,17 @@ $(document).ready(function () {
 
     $('.delete-comment').on('click', function(){ 
       var comment_uf = $(this).data('comment-id') 
-      var micropost_uf = $(this).data('micropost-id')
-
          $.ajax({
-         url: '/comments/destroy',
-         type: 'DELETE',
-         data: {
-          comment_id: comment_uf,
-          micropost_id:micropost_uf
-        }   
+         url: '/comments/'+comment_uf,
+         type: 'DELETE'  
          })
     })
 
     $('.delete-reply').on('click', function(){ 
       var reply_uf = $(this).data('reply-id') 
-      var comment_uf = $(this).data('comment-id')
-
          $.ajax({
-         url: '/replies/destroy',
-         type: 'DELETE',
-         data: {
-          reply_id: reply_uf,
-          comment_id: comment_uf
-        }   
+         url: '/replies/'+ reply_uf,
+         type: 'DELETE'
          })
     })
 
@@ -115,3 +103,18 @@ $(document).ready(function () {
   show('.edit-reply', 'form-reply-edit-', '.form-reply-edit');
   show('.edit-comment', 'form-comment-', '.form-edit');
   
+  $(document).ready(function () {
+    var commentTextarea = $('textarea');
+    commentTextarea.each(function () {
+      $(this).on('input', function () {  
+        var commentId = this.id.split('-')[2];  
+        var submitButton = document.getElementById('button-comment-content-' + commentId); 
+        if($(this).val() ==='') {
+          submitButton.style.display = 'none';
+        }
+        else {
+          submitButton.style.display = 'block';
+        }
+      })  
+    })
+});

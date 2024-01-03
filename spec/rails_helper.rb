@@ -69,8 +69,10 @@ RSpec.configure do |config|
   FactoryBot::SyntaxRunner.class_eval do
     include RSpec::Mocks::ExampleMethods
   end
+  Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
   RSpec.configure do |c|
     c.include FactoryBot::Syntax::Methods
+    c.include ControllerMacros, type: :controller
   end
 end

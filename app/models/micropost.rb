@@ -7,7 +7,7 @@ class Micropost < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :comments, class_name: 'Micropost', foreign_key: 'parent_id', dependent: :destroy
   has_many :replies, class_name: 'Micropost', foreign_key: 'parent_id', dependent: :destroy
-
+  validates :content, presence: true, length: {maximum: 2000}
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
   validates :image, content_type: {

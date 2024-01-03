@@ -22,11 +22,16 @@ class SessionsController < ApplicationController
   end
 
   def use_omniauth
-    user = User.from_omniauth(request.env['omniauth.auth'])
-    # request.env['omniauth.auth'] là một biến trong Rails chứa thông tin về người dùng được trả về từ quá trình xác thực OAuth thông qua OmniAuth.
-    log_in user
-    remember(user)
-    redirect_to root_path
+    auth_hash = request.env['omniauth.auth']
+    if auth_hash
+      user = User.from_omniauth(auth_hash)
+      log_in user
+      remember(user)
+      redirect_to root_path
+    else
+      flash[:alert] = 'Please try again.'
+      redirect_to login_path
+    end
   end
 
   def destroy

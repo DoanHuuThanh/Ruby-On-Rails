@@ -107,6 +107,17 @@ RSpec.describe SessionsController, type: :controller do
 
       expect(response).to redirect_to(root_path)
     end
+
+    it 'does not log in the user' do
+      # Stub the OmniAuth response to simulate authentication failure
+      OmniAuth.config.test_mode = true
+      OmniAuth.config.mock_auth[:google_oauth2] = :invalid_credentials
+
+      get :use_omniauth
+
+      expect(response).to redirect_to(login_path)
+      expect(flash[:alert]).to eq('Please try again.')
+    end
   end
   describe 'DELETE #destroy' do
     it 'logs out the user' do

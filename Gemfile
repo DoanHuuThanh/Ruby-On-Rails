@@ -69,6 +69,7 @@ end
 group :test do
   gem 'minitest-reporters'
   gem 'rspec-rails'
+  gem 'simplecov', require: false
 end
 
 group :development, :test do
@@ -103,8 +104,6 @@ gem 'devise'
 
 gem 'active_storage_validations'
 
-# cài đặt imagemagick để sử dụng 2 gem dưới
-# sudo apt-get -y install imagemagick
 gem 'omniauth-google-oauth2'
 
 gem 'omniauth-github', '~> 2.0.0'

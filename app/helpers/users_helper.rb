@@ -16,7 +16,7 @@ module UsersHelper
     redirect_to(root_url) unless @user == current_user
   end
 
-  def correct_user?
+  def user_fix_comment?
     @micropost = Micropost.find_by(id: params[:id])
     @user = @micropost.user
     redirect_to(root_url) unless @user == current_user

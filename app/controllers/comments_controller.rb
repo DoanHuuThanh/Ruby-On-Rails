@@ -3,28 +3,19 @@
 # Controller Comments
 class CommentsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :correct_user?, only: %i[update destroy]
-  def create_comment
-    @micropost = Micropost.find_by(id: params[:micropost_id])
-    @comment = @micropost.comments.build(content: params[:micropost][:content], parent_id: params[:parent_id])
-    @comment.image.attach(params[:micropost][:image])
-    @comment.user = current_user
-    if @comment.save
-      flash[:success] = 'Comment created!'
-      redirect_to root_path
+  before_action :user_fix_comment?, only: %i[update destroy]
+  def create
+    id = params[:micropost][:micropost_id]
+    if id.present?
+      @micropost = Micropost.find_by(id: id)
+      @comment = @micropost.comments.build(comment_params)
+      @comment.image.attach(params[:micropost][:image])
+      @comment.user = current_user
     else
-      @feed_items = current_user.feed.paginate(page: params[:page], per_page: 6)
-      flash[:error] = 'Error creating comment'
+      flash[:error] = 'Error'
       render 'static_pages/home'
     end
-  end
-
-  def create_reply
-    @comment = Micropost.find_by(id: params[:parent_id])
-    @reply = @comment.replies.build(content: params[:micropost][:content], parent_id: params[:parent_id])
-    @reply.image.attach(params[:micropost][:image])
-    @reply.user = current_user
-    if @reply.save
+    if @comment.save
       flash[:success] = 'Comment created!'
       redirect_to root_path
     else
@@ -36,7 +27,7 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Micropost.find_by(id: params[:id])
-    if @comment.update(content: params[:micropost][:content])
+    if !@comment.nil? && @comment.update(comment_params)
       flash[:success] = 'Comment updated!'
       redirect_to root_path
     else
@@ -48,7 +39,17 @@ class CommentsController < ApplicationController
 
   def destroy
     comment = Micropost.find_by(id: params[:id])
-    comment.destroy
-    respond_to(&:js)
+    if !comment.nil?
+      comment.destroy
+      respond_to(&:js)
+    else
+      flash[:error] = 'Error! destroy comment'
+    end
+  end
+
+  private
+
+  def comment_params
+    params.require(:micropost).permit(%i[content parent_id image])
   end
 end

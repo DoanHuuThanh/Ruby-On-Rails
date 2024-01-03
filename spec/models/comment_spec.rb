@@ -10,7 +10,7 @@ RSpec.describe CommentsController, type: :controller do
   describe 'comment' do
     let(:micropost_with_parent) { FactoryBot.create(:micropost_with_parent, user:) }
     it 'create  comment' do
-      post :create_comment, params: { micropost_id: micropost.id, parent_id: micropost.id, micropost: { content: Faker::Lorem.sentence } }
+      post :create, params: { micropost: { micropost_id: micropost.id, parent_id: micropost.id, content: Faker::Lorem.sentence } }
       expect(response).to redirect_to(root_path)
       expect(flash[:success]).to eq('Comment created!')
     end
@@ -22,7 +22,7 @@ RSpec.describe CommentsController, type: :controller do
     end
 
     it 'destroys comment asynchronously', js: true do
-      micropost = FactoryBot.create(:micropost_with_parent, user: user)
+      micropost = FactoryBot.create(:micropost_with_parent, user:)
       expect do
         delete :destroy, format: :js, params: { id: micropost.id }
       end.to change(Micropost, :count).by(-1)

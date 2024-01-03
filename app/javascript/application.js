@@ -54,7 +54,7 @@ $(document).ready(function () {
     $('.delete-reply').on('click', function(){ 
       var reply_uf = $(this).data('reply-id') 
          $.ajax({
-         url: '/replies/'+ reply_uf,
+         url: '/comments/'+ reply_uf,
          type: 'DELETE'
          })
     })

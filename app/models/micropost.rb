@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Micropost < ApplicationRecord
   belongs_to :user
   has_one_attached :image # một phương thức được sử dụng trong Rails để kết nối một tệp đính kèm (attachment) với một mô hình.

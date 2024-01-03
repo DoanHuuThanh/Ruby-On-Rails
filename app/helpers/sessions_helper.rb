@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SessionsHelper
   # tạo session
   def log_in(user)
@@ -10,7 +12,7 @@ module SessionsHelper
       @cunrent_user ||= User.find_by(id: session[:user_id])
     elsif (user_id = cookies.encrypted[:user_id])
       user = User.find_by(id: user_id)
-      if user && user.authenticated?(:remember, cookies[:remember_token])
+      if user&.authenticated?(:remember, cookies[:remember_token])
         log_in user
         @cunrent_user = user
       end
@@ -29,11 +31,11 @@ module SessionsHelper
 
   # lưu ng dùng rên cookies
   def remember(user)
-    if user.present?
+    return unless user.present?
+
     user.remember
     cookies.permanent.encrypted[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
-    end
   end
 
   # xóa ng dùng khỏi cookies

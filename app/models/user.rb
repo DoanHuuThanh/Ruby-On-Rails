@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
 
@@ -98,6 +100,7 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     return if auth.blank?
+
     password = User.new_token
     where(email: auth.info.email).first_or_initialize.tap do |user|
       user.provider = auth.provider

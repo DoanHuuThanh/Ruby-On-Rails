@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 ruby '3.2.2'
@@ -79,8 +81,8 @@ end
 
 group :development, :test do
   gem 'factory_bot_rails'
-  gem 'openssl'
   gem 'faker'
+  gem 'openssl'
 end
 
 gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'

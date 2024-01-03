@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :logged_in_user, only: %i[edit update index destroy following followers] # trc khi thực hiện các hành động edit,update trong controller,
   # hãy gọi phương thức logged_in_user
@@ -64,7 +66,7 @@ class UsersController < ApplicationController
   def destroy
     respond_to do |format|
       user = User.find_by(id: params[:user_id_delete])
-      user.destroy if user
+      user&.destroy
       format.js
     end
   end

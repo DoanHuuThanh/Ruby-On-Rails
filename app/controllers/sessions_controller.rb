@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   def new; end
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
+    if user&.authenticate(params[:session][:password])
       if user.activated?
         session.delete(:user_id)
         log_in user
@@ -21,7 +23,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  def use_omniauth
+  def omniauth
     auth_hash = request.env['omniauth.auth']
     if auth_hash
       user = User.from_omniauth(auth_hash)

@@ -1,4 +1,5 @@
-require 'faker'
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user do
     uid { Faker::Number.number(digits: 6) }
@@ -6,6 +7,6 @@ FactoryBot.define do
     name { Faker::Name.name }
     email { Faker::Internet.email }
     password { Faker::Internet.password(min_length: 6) }
-    activated {true}
+    activated { true }
   end
 end

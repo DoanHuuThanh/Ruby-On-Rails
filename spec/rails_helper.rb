@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+require 'simplecov'
+SimpleCov.start
+
 require 'factory_bot_rails'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
@@ -69,8 +72,18 @@ RSpec.configure do |config|
   FactoryBot::SyntaxRunner.class_eval do
     include RSpec::Mocks::ExampleMethods
   end
+  Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
   RSpec.configure do |c|
     c.include FactoryBot::Syntax::Methods
+    c.include ControllerMacros, type: :controller
+  end
+  FactoryBot::SyntaxRunner.class_eval do
+    include RSpec::Mocks::ExampleMethods
+  end
+
+  RSpec.configure do |c|
+    c.include FactoryBot::Syntax::Methods
+    # Other configurations...
   end
 end

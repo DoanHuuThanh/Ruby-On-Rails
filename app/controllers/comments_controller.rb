@@ -3,46 +3,58 @@
 # Controller Comments
 class CommentsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  def create
-    @micropost = Micropost.find_by(id: params[:micropost_id])
-    @comment = @micropost.comments.build(content_comment: params[:micropost][:content_comment],
-                                         parent_comment_id: params[:parent_comment_id])
-    @comment.user = current_user
+  before_action :comment_owner, only: %i[update destroy]
 
-    if @comment.save
-      flash[:success] = 'Comment created!'
-      redirect_to root_path
+  def create
+    id = params[:micropost][:micropost_id]
+    if id.present?
+      @micropost = Micropost.find_by(id:)
+      if @micropost
+        @comment = @micropost.comments.build(comment_params)
+        @comment.user = current_user
+        if @comment.save
+          respond_to(&:js)
+        else
+          @feed_items = current_user.feed.paginate(page: params[:page], per_page: 6)
+          respond_to do |format|
+            format.js { render 'error.js.erb' }
+          end
+        end
+      else
+        redirect_to root_path
+      end
     else
-      @feed_items = current_user.feed.paginate(page: params[:page], per_page: 6)
-      flash[:error] = 'Error creating comment'
-      render 'static_pages/home'
+      flash[:error] = 'Error'
+      respond_to do |format|
+        format.js { render 'error.js.erb' }
+      end
     end
   end
 
   def update
-    @micropost = Micropost.find_by(id: params[:micropost_id])
-    @comment = @micropost.comments.find_by(id: params[:id])
-    if @comment.update(content_comment: params[:micropost][:content_comment])
-      flash[:success] = 'Comment updated!'
-      redirect_to root_path
-    else
-      @feed_items = current_user.feed.paginate(page: params[:page], per_page: 6)
-      flash[:error] = 'Error updating comment'
-      render 'static_pages/home'
+    @comment = Micropost.find_by(id: params[:id])
+    respond_to do |format|
+      unless @comment.present? && @comment.update(comment_params)
+        @feed_items = current_user.feed.paginate(page: params[:page], per_page: 6)
+        format.html { render 'static_pages/home' }
+      end
+      format.js
     end
   end
 
   def destroy
-    respond_to do |format|
-      comment = Comment.find_by(id: params[:comment_id])
+    comment = Micropost.find_by(id: params[:id])
+    if comment.present?
       comment.destroy
-      format.js
+      respond_to(&:js)
+    else
+      flash[:error] = 'Error! destroy comment'
     end
   end
 
   private
 
   def comment_params
-    params.require(:micopost).permit(:content, :image)
+    params.require(:micropost).permit(:parent_id, :content, :image)
   end
 end

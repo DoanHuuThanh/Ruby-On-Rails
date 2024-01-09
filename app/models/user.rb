@@ -15,10 +15,10 @@ class User < ApplicationRecord
   before_create :default_activated
 
   validates :name,  presence: true, length: { maximum: 200 }
-  validates :email, presence: true, length: { maximum: 200, minium: 6 },
+  validates :email, presence: true, length: { maximum: 200, minimum: 6 },
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: { case_sensitive: false }, allow_nil: true
   has_secure_password
-  validates :password, presence: true, length: { maximum: 100, minium: 3 }, allow_nil: true
+  validates :password, presence: true, length: { maximum: 100, minimum: 3 }, allow_nil: true
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost

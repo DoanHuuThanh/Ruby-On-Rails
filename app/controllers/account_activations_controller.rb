@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller AccountActivations
 class AccountActivationsController < ApplicationController
   def edit
     user = User.find_by(email: params[:email])

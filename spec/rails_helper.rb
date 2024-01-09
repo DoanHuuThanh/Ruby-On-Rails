@@ -73,8 +73,7 @@ RSpec.configure do |config|
     include RSpec::Mocks::ExampleMethods
   end
 
-  RSpec.configure do |config|
-    config.include FactoryBot::Syntax::Methods
-    # Other configurations...
+  RSpec.configure do |c|
+    c.include FactoryBot::Syntax::Methods
   end
 end

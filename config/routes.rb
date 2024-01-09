@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  get 'auth/:provider/callback', to: 'sessions#use_omniauth'
+  get 'auth/:provider/callback', to: 'sessions#omniauth'
 
   get 'auth/failure', to: redirect('/')
   get '/logout', to: 'sessions#destroy'
@@ -26,11 +26,13 @@ Rails.application.routes.draw do
     end
   end
 
-  # Thông qua tùy chọn only,hỉ muốn định nghĩa hành động edit cho tài nguyên này.chỉ có một route và một action là edit sẽ được tạo ra để xử lý việc chỉnh sửa thông tin của tài khoản kích hoạt.
   resources :account_activations, only: :edit
   resources :password_resets, only: %i[create new update edit]
   resources :microposts, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
+  resources :comments, only: %i[create update destroy]
+  resources :replies, only: %i[create update destroy]
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

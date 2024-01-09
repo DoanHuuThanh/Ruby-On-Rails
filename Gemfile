@@ -49,6 +49,10 @@ gem 'bootsnap', require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
+  gem 'factory_bot_rails'
+  gem 'guard'
+  gem 'guard-minitest'
+  gem 'openssl'
 end
 
 group :development do
@@ -65,12 +69,9 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
-  gem 'selenium-webdriver'
-end
-
-group :test do
   gem 'minitest-reporters'
   gem 'rspec-rails'
+<<<<<<< HEAD
   gem 'simplecov', require: false
 end
 
@@ -83,6 +84,9 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'openssl'
+=======
+  gem 'selenium-webdriver'
+>>>>>>> comment3
 end
 
 gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
@@ -105,7 +109,10 @@ gem 'jquery-rails'
 gem 'devise'
 
 gem 'active_storage_validations'
+<<<<<<< HEAD
 
+=======
+>>>>>>> comment3
 gem 'omniauth-google-oauth2'
 
 gem 'omniauth-github', '~> 2.0.0'

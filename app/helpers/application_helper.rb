@@ -10,6 +10,3 @@ module ApplicationHelper
     end
   end
 end
-
-# Helper modules trong Rails được sử dụng để chứa các phương thức hỗ trợ
-# (helpers) mà bạn muốn sử dụng trong views, controllers, hoặc bất kỳ thành phần nào khác của ứng dụng Rails.

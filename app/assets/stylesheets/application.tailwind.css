@@ -123,3 +123,14 @@ li img {
 }
 
 
+.edit {
+  cursor: pointer;
+}
+
+.form-edit {
+  display: none;
+}
+
+.form-reply {
+  display: none;
+}

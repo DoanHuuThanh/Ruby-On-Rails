@@ -2,11 +2,11 @@
 
 class Micropost < ApplicationRecord
   belongs_to :user
-  has_one_attached :image # một phương thức được sử dụng trong Rails để kết nối một tệp đính kèm (attachment) với một mô hình.
-  # Thường được sử dụng với Active Storage
+  has_one_attached :image
+  has_many :comments, class_name: 'Micropost', foreign_key: 'parent_id', dependent: :destroy
+  validates :content, presence: true, length: { maximum: 2000 }
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
-  validates :content, presence: true, length: { maximum: 200, miniumum: 5 }
   validates :image, content_type: {
     in: %w[image/jpeg image/gif image/png],
     message: 'must be a valid image format'

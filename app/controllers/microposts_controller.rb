@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller Micropost
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: %i[create destroy]
   skip_before_action :verify_authenticity_token

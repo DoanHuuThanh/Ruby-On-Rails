@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller Sessions
 class SessionsController < ApplicationController
   def new; end
 
@@ -23,17 +24,11 @@ class SessionsController < ApplicationController
     end
   end
 
-  def omniauth
-    auth_hash = request.env['omniauth.auth']
-    if auth_hash
-      user = User.from_omniauth(auth_hash)
-      log_in user
-      remember(user)
-      redirect_to root_path
-    else
-      flash[:alert] = 'Please try again.'
-      redirect_to login_path
-    end
+  def use_omniauth
+    user = User.from_omniauth(request.env['omniauth.auth'])
+    log_in user
+    remember(user)
+    redirect_to root_path
   end
 
   def destroy

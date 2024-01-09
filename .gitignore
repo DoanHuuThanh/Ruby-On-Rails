@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+# Coverage
 /coverage/*
 
 # Ignore all environment files (except templates).
@@ -41,3 +42,9 @@
 !/app/assets/builds/.keep
 
 /node_modules
+
+# Ignore Gemfile.lock
+Gemfile.lock
+
+# Ignore .git directory
+.git/

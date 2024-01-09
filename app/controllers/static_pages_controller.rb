@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller Home
 class StaticPagesController < ApplicationController
   def home
     return unless logged_in?

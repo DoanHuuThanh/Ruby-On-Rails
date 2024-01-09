@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Model User
 class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
 
@@ -17,7 +18,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 200, minimum: 6 },
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: { case_sensitive: false }, allow_nil: true
   has_secure_password
-  validates :password, presence: true, length: { maximum: 100, minium: 3 }, allow_nil: true
+  validates :password, presence: true, length: { maximum: 100, minimum: 3 }, allow_nil: true
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost

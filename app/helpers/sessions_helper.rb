@@ -66,4 +66,15 @@ module SessionsHelper
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
   end
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless @user == current_user
+  end
+
+  def comment_owner
+    @micropost = Micropost.find_by(id: params[:id])
+    @user = @micropost.user
+    redirect_to(root_url) unless @user == current_user
+  end
 end

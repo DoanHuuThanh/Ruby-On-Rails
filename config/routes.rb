@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  get 'auth/:provider/callback', to: 'sessions#omniauth'
+  get 'auth/:provider/callback', to: 'sessions#use_omniauth'
 
   get 'auth/failure', to: redirect('/')
   get '/logout', to: 'sessions#destroy'
@@ -31,8 +31,6 @@ Rails.application.routes.draw do
   resources :microposts, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
   resources :comments, only: %i[create update destroy]
-  resources :replies, only: %i[create update destroy]
-
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

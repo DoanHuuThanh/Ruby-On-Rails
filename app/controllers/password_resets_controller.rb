@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Controller PasswordResets
 class PasswordResetsController < ApplicationController
   before_action :getuser, only: %i[edit update]
   before_action :valid_user, only: %i[edit update]

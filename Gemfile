@@ -71,22 +71,7 @@ group :test do
   gem 'capybara'
   gem 'minitest-reporters'
   gem 'rspec-rails'
-<<<<<<< HEAD
-  gem 'simplecov', require: false
-end
-
-group :development, :test do
-  gem 'guard'
-  gem 'guard-minitest' # hoặc gem 'guard-rspec' nếu bạn sử dụng RSpec
-end
-
-group :development, :test do
-  gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'openssl'
-=======
   gem 'selenium-webdriver'
->>>>>>> comment3
 end
 
 gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
@@ -109,10 +94,6 @@ gem 'jquery-rails'
 gem 'devise'
 
 gem 'active_storage_validations'
-<<<<<<< HEAD
-
-=======
->>>>>>> comment3
 gem 'omniauth-google-oauth2'
 
 gem 'omniauth-github', '~> 2.0.0'

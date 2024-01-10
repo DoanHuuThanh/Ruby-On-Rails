@@ -6,7 +6,7 @@ import "./src/jquery";
 
 $(document).ready(function () {
   $(document).on("click", ".delete-user-button", function () {
-    let user_id = $(this).data("user-id"); //lấy ở html data-user-id
+    let user_id = $(this).data("user-id");
     $.ajax({
       url: "users/destroy",
       type: "DELETE",
@@ -38,14 +38,6 @@ $(document).ready(function () {
     let comment_uf = $(this).data("comment-id");
     $.ajax({
       url: "/comments/" + comment_uf,
-      type: "DELETE",
-    });
-  });
-
-  $(document).on("click", ".delete-reply", function () {
-    let reply_uf = $(this).data("reply-id");
-    $.ajax({
-      url: "/comments/" + reply_uf,
       type: "DELETE",
     });
   });

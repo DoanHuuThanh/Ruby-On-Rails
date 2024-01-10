@@ -71,8 +71,8 @@ module SessionsHelper
   end
 
   def comment_owner
-    @micropost = Micropost.find_by(id: params[:id])
-    @user = @micropost.user
+    @comment = Micropost.find_by(id: params[:id])
+    @user = @comment.user
     redirect_to(root_url) unless @user == current_user
   end
 end

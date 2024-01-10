@@ -13,7 +13,7 @@
       </span>
       <div class="flex items-center space-x-2">
         <p class="edit-comment cursor-pointer text-blue-500 hover:underline" id="comment-<%= comment.id %>">Edit</p>
-        <button class="delete-comment text-red-500 hover:text-red-700" id="comment-<%= comment.id %>" data-micropost-id=<%= comment.parent_id %> data-comment-id=<%= comment.id %>>Delete</button>
+        <button class="delete-comment text-red-500 hover:text-red-700" id="comment-<%= comment.id %>" data-comment-id=<%= comment.id %>>Delete</button>
         <p class="feedback cursor-pointer text-black-500 hover:underline" id="comment-<%= comment.id %>">FeedBack</p>
       </div>
       <div id="reply_create_<%= comment.id %>" class="space-y-4">

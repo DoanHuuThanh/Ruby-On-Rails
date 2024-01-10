@@ -11,7 +11,7 @@
     </span>
     <div class="flex items-center space-x-2">
       <p class="edit-reply cursor-pointer text-blue-500 hover:underline" id="reply-<%=comment.id%>">Edit</p>
-      <button class="delete-reply text-red-500 hover:text-red-700" id="reply-<%=comment.id%>" data-comment-id=<%=comment.parent_id%> data-reply-id=<%=comment.id%>>Delete</button>
+      <button class="delete-comment text-red-500 hover:text-red-700" id="reply-<%=comment.id%>"  data-comment-id=<%=comment.id%>>Delete</button>
       <p class="feedback cursor-pointer text-black-500 hover:underline" id="reply-<%=comment.parent_id%>">FeedBack</p>
     </div>
     <%=render 'comments/reply_edit', comment: comment%>

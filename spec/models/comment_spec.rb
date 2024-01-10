@@ -5,21 +5,18 @@ require 'rails_helper'
 RSpec.describe Micropost, type: :model do
   let(:user) { FactoryBot.create(:user) }
   describe 'comment' do
-    it 'is valid' do
-      micropost = FactoryBot.build(:micropost, user:)
-      expect(micropost).to be_valid
+    context 'is valid' do
+      subject { FactoryBot.build(:micropost, user: user) }
+      it { should be_valid }
+      let(:micropost_with_parent) { FactoryBot.create(:micropost, :with_parent, user: user) }
+      it { micropost_with_parent.should be_valid }
+      it { micropost_with_parent.parent_id.should_not be_nil }
     end
 
-    it 'has a parent micropost' do
-      micropost_with_parent = FactoryBot.create(:micropost, :with_parent, user:)
-      expect(micropost_with_parent.parent_id).not_to be_nil
-    end
-
-    it 'raises an error if content is too long' do
-      long_content = 'a' * 2001
-      expect do
-        FactoryBot.create(:micropost, content: long_content)
-      end.to raise_error(ActiveRecord::RecordInvalid, /Content is too long/)
+    context 'with validates comment' do
+      subject { FactoryBot.build(:micropost, content: 'a' * 2001) }
+      it { should_not be_valid }
+      it { should validate_length_of(:content).is_at_most(2000).with_long_message('is too long (maximum is 2000 characters)') }
     end
   end
 end

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  get 'auth/:provider/callback', to: 'sessions#use_omniauth'
+  get 'auth/:provider/callback', to: 'sessions#omniauth'
 
   get 'auth/failure', to: redirect('/')
   get '/logout', to: 'sessions#destroy'

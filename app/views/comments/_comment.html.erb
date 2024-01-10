@@ -1,0 +1,28 @@
+<!-- Comments -->
+<% if comment.parent_id.present? %>
+  <div id="comment_<%= comment.id %>" class="flex items-start space-x-4">
+    <%= link_to gravatar_for(comment.user, size: 40), comment.user, class: "rounded-full" %>
+    <div class="flex-grow">
+      <div class="flex items-center mb-1">
+        <p><strong><%= comment.user.name %>:</strong></p>
+        <p id="content-<%= comment.id %>" class="ml-1"><%= comment.content %></p>
+      </div>
+      <%= image_tag comment.image, class: "mt-2 rounded-md w-20 h-20 object-cover" if comment.image.attached? %> 
+      <span class="timestamp text-gray-500">
+        Posted <%= time_ago_in_words(comment.created_at) %> ago.
+      </span>
+      <div class="flex items-center space-x-2">
+        <p class="edit-comment cursor-pointer text-blue-500 hover:underline" id="comment-<%= comment.id %>">Edit</p>
+        <button class="delete-comment text-red-500 hover:text-red-700" id="comment-<%= comment.id %>" data-micropost-id=<%= comment.parent_id %> data-comment-id=<%= comment.id %>>Delete</button>
+        <p class="feedback cursor-pointer text-black-500 hover:underline" id="comment-<%= comment.id %>">FeedBack</p>
+      </div>
+      <div id="reply_create_<%= comment.id %>" class="space-y-4">
+        <% comment.comments.reverse_each do |comment| %>
+          <%= render 'comments/reply', comment: comment %>
+        <% end %>
+      </div>
+      <%= render 'comments/reply_form', comment: comment %>
+    </div>
+    <%= render 'comments/comment_edit', comment: comment %>
+  </div>
+<% end %>

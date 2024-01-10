@@ -1,0 +1,11 @@
+ <!-- Form for replying -->
+<div class="form-reply" id="form-reply-<%=comment.id%>">
+     <%= form_with(model: comment.comments.build, local: true, html: { class: "form-post", id: "form-post-#{comment.id}", remote: true }) do |form| %>
+         <%= render 'shared/error_messages', object: form.object %>
+            <%= form.hidden_field :micropost_id, value: comment.id %>
+            <%= form.hidden_field :parent_id, value: comment.id%>
+            <%= form.text_area :content, id: "comment-content-#{comment.id}", placeholder: 'Add a reply...', class: "w-full p-2 border rounded" %>
+            <%= form.submit 'Post', id: "button-comment-content-#{comment.id}", class: "bg-blue-500 text-white font-bold py-2 px-4 rounded hidden" %>
+            <%= form.file_field :image, id: "image-#{comment.id}" %>
+        <% end %>
+</div>

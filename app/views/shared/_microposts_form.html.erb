@@ -1,13 +1,10 @@
 <%= form_with(model: @micropost , local: true, html: { class: "mb-4" }) do |f| %>
-<!--f.object trong context của form helper thường đại diện cho đối tượng mà form đang thực hiện thao tác trên đó. Trong trường hợp này đối tượng là @micropost-->
  <%= render 'shared/error_messages', object: f.object %>
   <div class="mb-4">
-    <%= f.text_area :content,id: "comment-content-0", placeholder: "Compose new micropost...", class: "w-full p-3 border rounded" %>
+    <%= f.text_area :content, id: "comment-content-0", placeholder: "Compose new micropost...", class: "w-full p-3 border rounded" %>
   </div>
-  <%= f.submit "Post",id: "button-comment-content-0", class: "bg-blue-500 text-white font-bold py-2 px-4 rounded hidden",accept: "image/jpeg,image/gif,image/png" %>
-                                                                                    <!--chỉ định ng dùng chỉ có thể chọn các tệp có định dạng trên-->
-
+  <%= f.submit "Post", id: "button-comment-content-0", class: "bg-blue-500 text-white font-bold py-2 px-4 rounded hidden",accept: "image/jpeg,image/gif,image/png" %>
   <span class="image">
-<%= f.file_field :image,id: "image-0" %>
+<%= f.file_field :image, id: "image-0" %>
 </span>
 <% end %>

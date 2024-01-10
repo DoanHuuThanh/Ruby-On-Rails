@@ -3,43 +3,42 @@
 # Controller Comments
 class CommentsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :user_fix_comment?, only: %i[update destroy]
+  before_action :comment_owner, only: %i[update destroy]
+
   def create
     id = params[:micropost][:micropost_id]
     if id.present?
       @micropost = Micropost.find_by(id: id)
-      @comment = @micropost.comments.build(comment_params)
-      @comment.image.attach(params[:micropost][:image])
-      @comment.user = current_user
+        @comment = @micropost.comments.build(comment_params)
+        @comment.user = current_user
+        if @comment.save
+          respond_to(&:js)
+        else
+          @feed_items = current_user.feed.paginate(page: params[:page], per_page: 6)
+          respond_to do |format|
+            format.js { render 'error.js.erb' }
+          end
+        end
     else
       flash[:error] = 'Error'
-      render 'static_pages/home'
-    end
-    if @comment.save
-      flash[:success] = 'Comment created!'
       redirect_to root_path
-    else
-      @feed_items = current_user.feed.paginate(page: params[:page], per_page: 6)
-      flash[:error] = 'Error creating comment'
-      render 'static_pages/home'
     end
   end
 
   def update
     @comment = Micropost.find_by(id: params[:id])
-    if !@comment.nil? && @comment.update(comment_params)
-      flash[:success] = 'Comment updated!'
-      redirect_to root_path
-    else
-      @feed_items = current_user.feed.paginate(page: params[:page], per_page: 6)
-      flash[:error] = 'Error updating comment'
-      render 'static_pages/home'
+    respond_to do |format|
+      unless @comment.present? && @comment.update(comment_params)
+        @feed_items = current_user.feed.paginate(page: params[:page], per_page: 6)
+        format.html { render 'static_pages/home' }
+      end
+      format.js
     end
   end
 
   def destroy
     comment = Micropost.find_by(id: params[:id])
-    if !comment.nil?
+    if comment.present?
       comment.destroy
       respond_to(&:js)
     else
@@ -50,6 +49,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:micropost).permit(%i[content parent_id image])
+    params.require(:micropost).permit(:parent_id, :content, :image)
   end
 end

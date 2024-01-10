@@ -9,5 +9,8 @@
     "@hotwired/stimulus": "^3.2.2",
     "esbuild": "^0.19.9",
     "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "prettier": "3.1.1"
   }
 }

@@ -1,9 +1,9 @@
-$("#comment-content-<%= params[:micropost][:micropost_id] %>").val('');
-$("#button-comment-content-<%= params[:micropost][:micropost_id] %>").hide();
-var commentContainer = $("#comment_create_<%= params[:micropost][:micropost_id] %>")
-commentContainer.prepend('<%= j(render partial: "comments/comment", locals: { comment: @comment }) %>');
+$("#comment-content-<%= params[:micropost][:id] %>").val('');
+$("#button-comment-content-<%= params[:micropost][:id] %>").hide();
+var commentContainer = $("#comment_create_<%= params[:micropost][:id] %>")
+commentContainer.append('<%= j(render partial: "comments/comment", locals: { comment: @comment }) %>');
 
-$("#comment-content-<%= params[:micropost][:micropost_id] %>").val('');
-$("#button-comment-content-<%= params[:micropost][:micropost_id] %>").hide();
-var commentContainer = $("#reply_create_<%= params[:micropost][:micropost_id] %>")
-commentContainer.prepend('<%= j(render partial: "comments/reply", locals: { comment: @comment }) %>');
+$("#comment-content-<%= params[:micropost][:id] %>").val('');
+$("#button-comment-content-<%= params[:micropost][:id] %>").hide();
+var commentContainer = $("#reply_create_<%= params[:micropost][:id] %>")
+commentContainer.append('<%= j(render partial: "comments/reply", locals: { comment: @comment }) %>');

@@ -86,4 +86,11 @@ RSpec.configure do |config|
     c.include FactoryBot::Syntax::Methods
     # Other configurations...
   end
+
+  Shoulda::Matchers.configure do |c|
+    c.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
+  end
 end

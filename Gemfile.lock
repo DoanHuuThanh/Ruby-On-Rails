@@ -130,10 +130,13 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
-    faraday (2.9.0)
-      faraday-net_http (>= 2.0, < 3.2)
-    faraday-net_http (3.1.0)
-      net-http
+    faker (3.2.2)
+      i18n (>= 1.8.11, < 2)
+    faraday (2.8.1)
+      base64
+      faraday-net_http (>= 2.0, < 3.1)
+      ruby2_keywords (>= 0.0.4)
+    faraday-net_http (3.0.2)
     ffi (1.16.3)
     formatador (1.1.0)
     globalid (1.2.1)
@@ -159,9 +162,9 @@ GEM
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.7.1)
-    irb (1.11.0)
+    irb (1.11.1)
       rdoc
-      reline (>= 0.3.8)
+      reline (>= 0.4.2)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -344,6 +347,8 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     shellany (0.0.1)
+    shoulda-matchers (6.0.0)
+      activesupport (>= 5.2.0)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -420,6 +425,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   selenium-webdriver
+  shoulda-matchers (~> 6.0)
   sprockets-rails
   stimulus-rails
   tailwindcss-rails (~> 2.0)

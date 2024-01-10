@@ -20,10 +20,9 @@
     </div>
   </li>
     <ul id="comment_create_<%=micropost.id%>" class="space-y-4">
-    <% micropost.comments.each do |comment| %>
+    <% micropost.comments.reverse_each do |comment| %>
      <%=render 'comments/comment', comment: comment%>
     <% end %>
   </ul>
       <%=render 'comments/comment_form', micropost: micropost %>
-  
   <% end %>

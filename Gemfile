@@ -72,6 +72,7 @@ group :test do
   gem 'minitest-reporters'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 6.0'
 end
 
 gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'

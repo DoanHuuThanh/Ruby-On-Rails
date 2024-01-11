@@ -6,9 +6,9 @@ RSpec.describe Micropost, type: :model do
   let(:user) { FactoryBot.create(:user) }
   describe 'comment' do
     context 'is valid' do
-      subject { FactoryBot.build(:micropost, user: user) }
+      subject { FactoryBot.build(:micropost, user:) }
       it { should be_valid }
-      let(:micropost_with_parent) { FactoryBot.create(:micropost, :with_parent, user: user) }
+      let(:micropost_with_parent) { FactoryBot.create(:micropost, :with_parent, user:) }
       it { micropost_with_parent.should be_valid }
       it { micropost_with_parent.parent_id.should_not be_nil }
     end

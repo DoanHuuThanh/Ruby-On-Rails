@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_231_227_080_427) do
+ActiveRecord::Schema[7.1].define(version: 20_240_110_071_739) do
   create_table 'active_storage_attachments', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'record_type', null: false
@@ -52,6 +52,17 @@ ActiveRecord::Schema[7.1].define(version: 20_231_227_080_427) do
     t.index ['user_id'], name: 'index_microposts_on_user_id'
   end
 
+  create_table 'reactions', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.integer 'action'
+    t.bigint 'user_id', null: false
+    t.bigint 'micropost_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['action'], name: 'index_reactions_on_action'
+    t.index ['micropost_id'], name: 'index_reactions_on_micropost_id'
+    t.index ['user_id'], name: 'index_reactions_on_user_id'
+  end
+
   create_table 'relationships', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
     t.integer 'follower_id'
     t.integer 'followed_id'
@@ -85,4 +96,6 @@ ActiveRecord::Schema[7.1].define(version: 20_231_227_080_427) do
   add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'microposts', 'users'
+  add_foreign_key 'reactions', 'microposts'
+  add_foreign_key 'reactions', 'users'
 end

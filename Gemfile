@@ -102,3 +102,4 @@ gem 'omniauth-github', '~> 2.0.0'
 gem 'omniauth-facebook'
 
 gem 'dotenv-rails'
+gem 'font-awesome-rails'

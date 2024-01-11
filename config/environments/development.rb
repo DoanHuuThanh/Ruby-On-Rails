@@ -77,7 +77,7 @@ Rails.application.configure do
   }
 
   config.active_storage.variant_processor = true
-  config.hosts << "5506-118-70-67-83.ngrok-free.app"
+  config.hosts << '5506-118-70-67-83.ngrok-free.app'
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

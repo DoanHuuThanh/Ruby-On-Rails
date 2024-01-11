@@ -1,0 +1,34 @@
+<!-- app/views/reactions/_form.html.erb -->
+<div data-micropost="<%=micropost.id%>" class="show_user_react flex items-center space-x-2 cursor-pointer">
+  <%= image_tag('like.svg', class: 'icon transition ease-in-out delay-150 h-4 hover:-translate-y-1 hover:scale-110 duration-300') %>
+ <p id="count_react_<%=micropost.id%>"><%= micropost.reactions.count %></p>
+</div>
+
+<div class="p-2 h-300 relative">
+  <div id="user_react_<%=micropost.id%>" class="user_react hidden  fixed bottom-20 bg-orange-50 left-2/4 top-1/4 transform -translate-x-1/2 rounded-[30px] z-10">
+    <div class="close_user_react w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center mx-auto mb-2 cursor-pointer ">X</div>
+    <% micropost.reactions.each do |react| %>
+      <%= render 'reactions/user_react', react: react %>
+    <% end %>
+  </div>
+</div>
+
+<div class="reactions_block mt-4">
+  <div class="reactions flex space-x-2 bg-white h-12 p-2 rounded-full">
+    <% Reaction.actions.keys.each do |action_type| %> 
+      <button class="submit_react" data-id="<%= micropost.id %>" data-action="<%= action_type %>">
+        <span class="mr-2"><%= render_reaction_icon(action_type) %></span>
+      </button>
+    <% end %>
+  </div>
+
+  <% if user = current_user.reactions.find_by(micropost_id: micropost.id) %>
+    <button class="ml-2">
+      <span id="react_<%= micropost.id %>"><%= render_reaction_icon(user.action) %></span>
+    </button>
+  <% else %>
+    <button class="ml-2">
+      <span id="react_<%= micropost.id %>"><%= image_tag("no_like.svg", class: 'icon') %></span>
+    </button>
+  <% end %>
+</div>

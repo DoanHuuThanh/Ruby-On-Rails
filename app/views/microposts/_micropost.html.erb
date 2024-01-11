@@ -10,6 +10,7 @@
       <span class="content text-gray-800 block mb-2">
         <%= micropost.content %>
         <%= image_tag micropost.image, class: "mt-2 rounded-md w-40 h-40 object-cover" if micropost.image.attached? %> 
+        <%=render 'reactions/reaction_form', micropost: micropost%>
       </span>
       <span class="timestamp text-gray-500">
         Posted <%= time_ago_in_words(micropost.created_at) %> ago.

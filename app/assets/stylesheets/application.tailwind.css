@@ -134,3 +134,32 @@ li img {
 .form-reply {
   display: none;
 }
+
+.icon {
+  height: 30px;
+  width: 30px
+}
+.reactions_block {
+  position: relative;
+  border-radius: 30%;
+}
+
+.reactions {
+  position: absolute;
+  display: none;
+  bottom: 40px;
+  border: none;
+}
+
+.reactions_block:hover .reactions {
+  display: flex;
+}
+
+ .user_react {
+  width: 500px;
+  height: 500px;
+}
+
+
+
+

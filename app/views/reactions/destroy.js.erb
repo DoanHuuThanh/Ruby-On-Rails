@@ -1,0 +1,3 @@
+$("#react_<%=params[:mic_id]%>").html('<%=image_tag("no_like.svg", class: 'icon')%>')
+$("#delete_react_<%=@existing_reaction.id%>").remove();
+$("#count_react_<%=params[:mic_id]%>").html('<%=Micropost.find(params[:mic_id]).reactions.count%>')

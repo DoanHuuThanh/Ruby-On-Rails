@@ -79,12 +79,39 @@ $(document).ready(function () {
     });
   });
 
+  $(document).on("click", ".submit_react", function (e) {
+    let formData = {}
+    formData.mic_id = $(this).data("id")
+    formData.action_type = $(this).data("action")
+    console.log(formData)
+    $.ajax({
+      url: "/reactions",
+      type: "POST",
+      data: formData,
+      success: function (response) {
+        console.log(response);
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+  });
+
   $("#micropost_image").on("change", function () {
     const size_in_megabytes = this.files[0].size / 1024 / 1024;
     if (size_in_megabytes > 5) {
       alert("Maximum file size is 5MB. Please choose a smaller file.");
       $("#micropost_image").val("");
     }
+  });
+
+  $(document).on("click",".show_user_react",function (e) {
+      let rect = $(this).data("micropost")
+      $("#user_react_" + rect).show();
+  });
+
+  $(document).on("click",".close_user_react",function (e) {
+    $(".user_react").hide();
   });
 });
 
@@ -116,3 +143,4 @@ $(document).ready(function () {
     }
   });
 });
+

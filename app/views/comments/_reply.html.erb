@@ -6,6 +6,7 @@
       <p id="content-<%= comment.id %>" class="mb-1 ml-1"><%= comment.content %></p>
     </div>
     <%= image_tag comment.image, class: "mt-2 rounded-md w-10 h-10 object-cover" if comment.image.attached? %> 
+    <%=render 'reactions/reaction_form', micropost: comment%>
     <span class="timestamp text-gray-500">
       Posted <%= time_ago_in_words(comment.created_at) %> ago.
     </span>

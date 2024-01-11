@@ -1,0 +1,4 @@
+$("#react_<%=params[:mic_id]%>").html('<%=render_reaction_icon(params[:action_type])%>')
+var reactContainer = $("#user_react_<%= params[:mic_id] %>")
+reactContainer.append('<%= j(render partial: "reactions/user_react", locals: { react: @reaction}) %>');
+$("#count_react_<%=params[:mic_id]%>").html('<%=Micropost.find(params[:mic_id]).reactions.count%>')

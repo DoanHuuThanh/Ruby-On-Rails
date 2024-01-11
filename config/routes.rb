@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :microposts, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
   resources :comments, only: %i[create update destroy]
+  resources :reactions, only: %i[create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

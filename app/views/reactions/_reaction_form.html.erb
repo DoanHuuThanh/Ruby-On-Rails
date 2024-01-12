@@ -5,7 +5,7 @@
 </div>
 
 <div class="p-2 h-300 relative">
-  <div id="user_react_<%=micropost.id%>" class="user_react hidden  fixed bottom-20 bg-orange-50 left-2/4 top-1/4 transform -translate-x-1/2 rounded-[30px] z-10">
+  <div id="user_react_<%=micropost.id%>" class="user_react hidden  fixed bottom-20 bg-orange-50 left-2/4 top-1/4 transform -translate-x-1/2 rounded-[30px] z-10 overflow-auto">
     <div class="close_user_react w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center mx-auto mb-2 cursor-pointer ">X</div>
     <% micropost.reactions.each do |react| %>
       <%= render 'reactions/user_react', react: react %>

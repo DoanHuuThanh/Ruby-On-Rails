@@ -83,17 +83,10 @@ $(document).ready(function () {
     let formData = {}
     formData.mic_id = $(this).data("id")
     formData.action_type = $(this).data("action")
-    console.log(formData)
     $.ajax({
       url: "/reactions",
       type: "POST",
-      data: formData,
-      success: function (response) {
-        console.log(response);
-      },
-      error: function (error) {
-        console.log(error);
-      },
+      data: formData
     });
   });
 

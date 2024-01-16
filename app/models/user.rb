@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :microposts, dependent: :destroy
   has_many :reactions, dependent: :destroy
+  has_many :conversation_members, dependent: :destroy
+  has_many :messages, dependent: :destroy
   has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
   has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
@@ -100,6 +102,10 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def add_group(room)
+    conversation_members.create!(conversation_id: room.id)
+  end
+
   def self.from_omniauth(auth)
     return if auth.blank?
 
@@ -113,5 +119,9 @@ class User < ApplicationRecord
       user.oauth_token = auth.credentials.token
       user.save!
     end
+  end
+
+  def self.all_except(user)
+    where.not(id: user)
   end
 end

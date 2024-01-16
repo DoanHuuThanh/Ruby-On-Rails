@@ -1,0 +1,20 @@
+<div id="delete_message_<%= message.id %>">
+  <div class="col-start-6 col-end-13 p-3 rounded-lg">
+    <div class="text flex items-center justify-start flex-row-reverse">
+      <div class="flex items-center justify-center h-10 w-40 rounded-full bg-rose-400 flex-shrink-0">
+        <%= message.user.name %>
+      </div>
+      <div class="relative mr-3 text-sm bg-emerald-400 py-2 px-4 shadow rounded-xl">
+        <div>
+          <div id="message_<%= message.id %>"><%= message.content %></div>
+        </div>
+        <div id="seen_<%= message.id %>" class="absolute text-xs bottom-0 right-0 -mb-5 mr-2 text-gray-500"><%= message.status %></div>
+        <div class="du text-sm text-gray-700 cursor-pointer hover:text-gray-900 transition duration-300 ease-in-out absolute right-20 bottom-9 flex">
+          <div id="update_message_<%= message.id %>" class="update_mes mr-4">Edit</div>
+          <div data-mes-id="<%= message.id %>" class="delete_mes mr-4">Delete</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'messages/form_update', message: message %>
+</div>

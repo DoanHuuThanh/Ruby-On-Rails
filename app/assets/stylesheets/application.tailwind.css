@@ -160,6 +160,31 @@ li img {
   height: 500px;
 }
 
+.contain {
+  height: 700px;
+}
 
+.mes {
+  height: 640px
+}
 
+.mesa {
+  height: 500px;
+}
 
+.text {
+  position: relative;
+}
+
+.du {
+  position: absolute;
+  display: none;
+}
+
+.text:hover .du {
+   display: flex;
+}
+
+.form_edit_mes {
+  display: none;
+}

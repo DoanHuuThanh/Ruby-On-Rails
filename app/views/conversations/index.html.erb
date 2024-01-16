@@ -1,0 +1,56 @@
+<% provide(:title, "MessageRoom") %>
+
+<div id="user_id" data-user-id="<%= current_user.id %>"></div>
+
+<% if @room.present? %>
+  <div id="room_id" data-room-id="<%= @room.try(:id) %>"></div>
+<% elsif @user.present? %>
+  <div id="room_id" data-room-id="<%= @user.id + current_user.id %>"></div>
+<% end %>
+
+<div class="contain bg-gray-200 h-full flex justify-between p-4">
+  <div class="bg-white w-1/4 p-6 rounded-md shadow-md">
+    <h1 class="text-2xl font-bold mb-4">User</h1>
+    
+    <% @users.each do |user| %>
+      <div class="room bg-white px-4 py-2 mb-2 border-b border-teal-500 rounded-md">
+        <%= link_to user.name, user_conversation_conversation_path(user) %>   
+      </div>
+    <% end %>
+  </div>
+
+  <div class="bg-white w-1/4 p-6 rounded-md shadow-md">
+    <h1 class="text-2xl font-bold mb-4">Group</h1>
+    
+    <% @rooms.each do |room| %>
+      <% conversation = Conversation.find_by(id: room.conversation_id) %>
+      <div class="room bg-white px-4 py-2 mb-2 border-b border-teal-500 rounded-md">
+        <%= link_to conversation.name, conversation %>
+        <div class="text-xs text-gray-500">
+          <%= pluralize(conversation.conversation_members.count, "member") %>
+        </div>  
+      </div>
+    <% end %>
+
+    <div class="mt-4">
+      <h1 class="text-lg font-bold mb-2">Add Group</h1>
+      
+      <%= form_with(model: Conversation.new, url: conversations_path, local: true) do |f| %>
+        <div class="mb-2">
+          <%= f.text_field :name, class: 'w-full p-2 border rounded-md focus:outline-none focus:border-blue-500' %>
+        </div>
+        <%= f.submit "Add", class: "w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="flex flex-col h-min-screen w-3/4 bg-gray-100 p-4">
+    <div class="flex flex-col space-y-4">
+      <% if @room.present? %>
+        <%= render 'messages/room_chat', message: current_user.messages.build, room: @room %>
+      <% elsif @user.present? %>
+        <%= render 'messages/user_chat', message: current_user.messages.build, user: @user %>
+      <% end %>
+    </div>
+  </div>
+</div>

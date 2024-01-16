@@ -5,7 +5,7 @@
     <%= link_to gravatar_for(micropost.user, size: 40), micropost.user, class: "mr-4 rounded-full" %>
     <div class="flex-grow">
       <span class="user">
-        <%= link_to micropost.user.name, micropost.user, class: "font-bold text-blue-500 hover:underline" %>
+        <%= link_to micropost.user.name, micropost.user, class: "link font-bold text-blue-500 hover:underline" %>
       </span>
       <span class="content text-gray-800 block mb-2">
         <%= micropost.content %>

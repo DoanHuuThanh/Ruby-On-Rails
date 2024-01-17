@@ -6,27 +6,39 @@ class MessagesController < ApplicationController
 
   def create
     @message = current_user.messages.build(message_param)
-    return unless @message.save
-
-    SendMessageJob.perform_later(@message, current_user)
-    respond_to(&:js)
+    if @message.save
+      SendMessageJob.perform_later(@message, current_user)
+      respond_to(&:js)
+    else
+      respond_to do |format|
+        format.js { render template: 'messages/error_message' }
+      end
+    end
   end
 
   def update
     @message = Message.find(params[:message][:id])
-    return unless @message.present? && @message.update(message_param)
-
-    UpdateMessageJob.perform_later(@message, current_user)
-    respond_to(&:js)
+    if @message.present? && @message.update(message_param)
+      UpdateMessageJob.perform_later(@message, current_user)
+      respond_to(&:js)
+    else
+      respond_to do |format|
+        format.js { render template: 'messages/error_message' }
+      end
+    end
   end
 
   def destroy
     @message = Message.find(params[:id])
-    return unless @message.present?
-
-    DestroyMessageJob.perform_later(@message, current_user)
-    @message.destroy
-    respond_to(&:js)
+    if @message.present?
+      DestroyMessageJob.perform_later(@message, current_user)
+      @message.destroy
+      respond_to(&:js)
+    else
+      respond_to do |format|
+        format.js { render template: 'messages/error_message' }
+      end
+    end
   end
 
   private

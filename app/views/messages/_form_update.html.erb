@@ -1,5 +1,5 @@
 <div id="form_edit_mes_<%= message.id %>" class="form_edit_mes">
-  <%= form_with(model: message, local: true, html: { id: "form-mes-update-#{message.id}", class: "form-mes-update", remote: true }) do |form| %>
+  <%= form_with(model: message, local: true, html: { data: {mes_id: message.id }, class: "form-mes-update", remote: true }) do |form| %>
     <%= form.hidden_field :id, value: message.id %>
     <%= form.hidden_field :status, value: "edited" %>
 

@@ -5,7 +5,7 @@
 <% if @room.present? %>
   <div id="room_id" data-room-id="<%= @room.try(:id) %>"></div>
 <% elsif @user.present? %>
-  <div id="room_id" data-room-id="<%= @user.id + current_user.id %>"></div>
+  <div id="room_id" data-room-id="user_<%= @user.id + current_user.id %>"></div>
 <% end %>
 
 <div class="contain bg-gray-200 h-full flex justify-between p-4">

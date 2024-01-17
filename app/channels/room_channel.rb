@@ -3,7 +3,12 @@
 # RoomChannel
 class RoomChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "room_channel_#{params[:conversation_id]}"
+    room = params[:conversation_id]
+    if room
+      stream_from "room_channel_#{room}"
+    else
+      reject
+    end
   end
 
   def unsubscribed

@@ -11,12 +11,15 @@
           <!-- Add a class for other user information (e.g., email, address) if needed -->
         </div>
       </div>
+        <%if (@user != current_user)%> 
+          <%= link_to "Nhắn tin", user_conversation_conversation_path(@user), class: "bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700" %>
+        <%end%>
     </section>
     <section class="stats">
       <%= render 'shared/stat' %>
     </section>
   </aside>
-
+  
   <div class="w-2/3 p-4">
     <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>

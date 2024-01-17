@@ -78,6 +78,7 @@ RSpec.configure do |config|
   RSpec.configure do |c|
     c.include FactoryBot::Syntax::Methods
     c.include ControllerMacros, type: :controller
+    c.include ActionCable::TestHelper
   end
   FactoryBot::SyntaxRunner.class_eval do
     include RSpec::Mocks::ExampleMethods

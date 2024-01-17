@@ -10,6 +10,6 @@ class UpdateMessageJob < ApplicationJob
     end
     return unless message.receiver.present?
 
-    ActionCable.server.broadcast("room_channel_#{message.receiver + message.user_id}", { mes_id: message.id, content: message.content, action: 'update', status: message.status })
+    ActionCable.server.broadcast("room_channel_user_#{message.receiver + message.user_id}", { mes_id: message.id, content: message.content, action: 'update', status: message.status })
   end
 end

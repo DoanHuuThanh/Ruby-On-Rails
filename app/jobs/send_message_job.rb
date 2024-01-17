@@ -17,6 +17,6 @@ class SendMessageJob < ApplicationJob
     ActionCable.server.broadcast("room_channel_#{message.conversation_id}", { mine:, their: theirs, message:, action: 'create' }) if message.conversation_id.present?
     return unless message.receiver.present?
 
-    ActionCable.server.broadcast("room_channel_#{message.receiver + message.user_id}", { mine:, their: theirs, message:, action: 'create' })
+    ActionCable.server.broadcast("room_channel_user_#{message.receiver + message.user_id}", { mine:, their: theirs, message:, action: 'create' })
   end
 end

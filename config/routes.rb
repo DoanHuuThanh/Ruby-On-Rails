@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     member do
       get 'user_conversation'
     end
+    collection do
+      post 'add_user_to_group'
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

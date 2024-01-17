@@ -10,7 +10,7 @@
         </div>
         <div id="seen_<%= message.id %>" class="absolute text-xs bottom-0 right-0 -mb-5 mr-2 text-gray-500"><%= message.status %></div>
         <div class="du text-sm text-gray-700 cursor-pointer hover:text-gray-900 transition duration-300 ease-in-out absolute right-20 bottom-9 flex">
-          <div id="update_message_<%= message.id %>" class="update_mes mr-4">Edit</div>
+          <div data-mes-id="<%= message.id %>" class="update_mes mr-4">Edit</div>
           <div data-mes-id="<%= message.id %>" class="delete_mes mr-4">Delete</div>
         </div>
       </div>

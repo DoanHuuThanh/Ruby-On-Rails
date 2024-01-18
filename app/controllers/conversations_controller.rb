@@ -41,17 +41,17 @@ class ConversationsController < ApplicationController
     end
   end
 
+  private
+
+  def room_params
+    params.require(:conversation).permit(:name)
+  end
+
   def set_room
     @room = Conversation.find(params[:id])
   end
 
   def set_user
     @user = User.find(params[:id])
-  end
-
-  private
-
-  def room_params
-    params.require(:conversation).permit(:name)
   end
 end

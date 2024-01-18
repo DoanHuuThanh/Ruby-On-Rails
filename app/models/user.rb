@@ -15,6 +15,7 @@ class User < ApplicationRecord
   before_save :downcase_email
   before_create :create_activation_digest
   before_create :default_activated
+  scope :all_except, ->(user) { where.not(id: user) }
 
   validates :name,  presence: true, length: { maximum: 200 }
   validates :email, presence: true, length: { maximum: 200, minimum: 6 },
@@ -121,7 +122,4 @@ class User < ApplicationRecord
     end
   end
 
-  def self.all_except(user)
-    where.not(id: user)
-  end
 end

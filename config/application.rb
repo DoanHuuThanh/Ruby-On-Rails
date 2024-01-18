@@ -2,6 +2,8 @@
 
 require_relative 'boot'
 require 'rails/all'
+require 'action_cable/engine'
+require 'action_cable'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -17,7 +19,7 @@ module Project
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
-    config.action_view.embed_authenticity_token_in_remote_forms = true
+    config.action_view.form_with_generates_remote_forms = true
 
     # Configuration for the application, engines, and railties goes here.
     #

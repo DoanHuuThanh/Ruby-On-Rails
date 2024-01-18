@@ -3,6 +3,9 @@
 //import "./controllers"
 
 import "./src/jquery";
+require("./channels")
+require("./chat.js")
+require("./link.js")
 
 $(document).ready(function () {
   $(document).on("click", ".delete-user-button", function () {
@@ -137,3 +140,4 @@ $(document).ready(function () {
   });
 });
 
+import "./channels"

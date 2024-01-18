@@ -1,5 +1,5 @@
 Arguments: 
-  /home/thanh2302/.asdf/installs/nodejs/20.9.0/bin/node /home/thanh2302/.asdf/installs/nodejs/20.9.0/bin/yarn add @hotwired/stimulus-loading
+  /home/thanh2302/.asdf/installs/nodejs/20.9.0/bin/node /home/thanh2302/.asdf/installs/nodejs/20.9.0/bin/yarn add cable_rady
 
 PATH: 
   /home/thanh2302/.asdf/plugins/nodejs/shims:/home/thanh2302/.asdf/installs/nodejs/20.9.0/bin:/home/thanh2302/.asdf/shims:/home/thanh2302/.asdf/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@hotwired%2fstimulus-loading: Not found
+  Error: https://registry.yarnpkg.com/cable_rady: Not found
       at params.callback [as _callback] (/home/thanh2302/.asdf/installs/nodejs/20.9.0/lib/node_modules/yarn/lib/cli.js:66145:18)
       at self.callback (/home/thanh2302/.asdf/installs/nodejs/20.9.0/lib/node_modules/yarn/lib/cli.js:140890:22)
       at Request.emit (node:events:514:28)
@@ -31,13 +31,17 @@ npm manifest:
     "name": "myapp",
     "private": "true",
     "scripts": {
-      "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets",
+      "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds",
       "build:css": "sass ./app/assets/stylesheets/application.tailwind.css ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
     },
     "dependencies": {
       "@hotwired/stimulus": "^3.2.2",
-      "@hotwired/turbo-rails": "^8.0.0-beta.1",
-      "esbuild": "^0.19.9"
+      "@rails/actioncable": "^7.1.2",
+      "esbuild": "^0.19.9",
+      "jquery": "^3.7.1"
+    },
+    "devDependencies": {
+      "prettier": "3.1.1"
     }
   }
 
@@ -126,7 +130,7 @@ Lockfile:
   
   "@esbuild/linux-x64@0.19.9":
     version "0.19.9"
-    resolved "https://registry.yarnpkg.com/@esbuild/linux-x64/-/linux-x64-0.19.9.tgz#ceb1d62cd830724ff5b218e5d3172a8bad59420e"
+    resolved "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.19.9.tgz"
     integrity sha512-JUjpystGFFmNrEHQnIVG8hKwvA2DN5o7RqiO1CVX8EN/F/gkCjkUMgVn6hzScpwnJtl2mPR6I9XV1oW8k9O+0A==
   
   "@esbuild/netbsd-x64@0.19.9":
@@ -161,32 +165,17 @@ Lockfile:
   
   "@hotwired/stimulus@^3.2.2":
     version "3.2.2"
-    resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.2.2.tgz#071aab59c600fed95b97939e605ff261a4251608"
+    resolved "https://registry.npmjs.org/@hotwired/stimulus/-/stimulus-3.2.2.tgz"
     integrity sha512-eGeIqNOQpXoPAIP7tC1+1Yc1yl1xnwYqg+3mzqxyrbE5pg5YFBZcA6YoTiByJB6DKAEsiWtl6tjTJS4IYtbB7A==
   
-  "@hotwired/turbo-rails@^8.0.0-beta.1":
-    version "8.0.0-beta.1"
-    resolved "https://registry.yarnpkg.com/@hotwired/turbo-rails/-/turbo-rails-8.0.0-beta.1.tgz#7d5bd2843caa5d8d224eb36f22078311163128bd"
-    integrity sha512-x9G95vehf5LR4yYGvhD4z6wBMbmAVi0V87FTfenrmXPru4SfOVDsCwdEINBWsLqOvCgRPQD9eY2nGyDfZlsukg==
-    dependencies:
-      "@hotwired/turbo" "^8.0.0-beta.1"
-      "@rails/actioncable" "^7.0"
-  
-  "@hotwired/turbo@^8.0.0-beta.1":
-    version "8.0.0-beta.1"
-    resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-8.0.0-beta.1.tgz#35a7086c4c959445db059ea4a9b9af85cdafa616"
-    integrity sha512-g66YmO/Oa+EThB3KkNDhrM9mFnNyRn6tqgwGiBHh4Vf+d3XjCznuWSG2o2e2cO/RlddVRtCwvBSMuG6sYQWX+g==
-    dependencies:
-      idiomorph "https://github.com/basecamp/idiomorph#rollout-build"
-  
-  "@rails/actioncable@^7.0":
+  "@rails/actioncable@^7.1.2":
     version "7.1.2"
     resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.1.2.tgz#d261ff4b72844f5af496671346ec478798f4ac2c"
     integrity sha512-KGziTZfbmGm8/fHOpj515xupbYU+49hsp4etfdpoDJ/CEY2bRZR0cyFcJkpK6n0t/sxOHNWY6bo9vSgXZvT7Mg==
   
   esbuild@^0.19.9:
     version "0.19.9"
-    resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.19.9.tgz#423a8f35153beb22c0b695da1cd1e6c0c8cdd490"
+    resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.19.9.tgz"
     integrity sha512-U9CHtKSy+EpPsEBa+/A2gMs/h3ylBC0H0KSqIg7tpztHerLi6nrrcoUJAkNCEPumx8yJ+Byic4BVwHgRbN0TBg==
     optionalDependencies:
       "@esbuild/android-arm" "0.19.9"
@@ -212,6 +201,12 @@ Lockfile:
       "@esbuild/win32-ia32" "0.19.9"
       "@esbuild/win32-x64" "0.19.9"
   
-  "idiomorph@https://github.com/basecamp/idiomorph#rollout-build":
-    version "0.0.8"
-    resolved "https://github.com/basecamp/idiomorph#e906820368e4c9c52489a3336b8c3826b1bf6de5"
+  jquery@^3.7.1:
+    version "3.7.1"
+    resolved "https://registry.npmjs.org/jquery/-/jquery-3.7.1.tgz"
+    integrity sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==
+  
+  prettier@3.1.1:
+    version "3.1.1"
+    resolved "https://registry.npmjs.org/prettier/-/prettier-3.1.1.tgz"
+    integrity sha512-22UbSzg8luF4UuZtzgiUOfcGM8s4tjBv6dJRT7j275NXsy2jb4aJa4NNveul5x4eqlF1wuhuR2RElK71RvmVaw==

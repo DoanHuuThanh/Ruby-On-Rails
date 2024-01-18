@@ -1,0 +1,44 @@
+<div id="form_edit_mes_<%= message.id %>" class="form_edit_mes">
+  <%= form_with(model: message, local: true, html: { data: {mes_id: message.id }, class: "form-mes-update", remote: true }) do |form| %>
+    <%= form.hidden_field :id, value: message.id %>
+    <%= form.hidden_field :status, value: "edited" %>
+
+    <div class="flex flex-row items-center">
+      <div class="flex flex-row items-center w-full border rounded-3xl h-12 px-2">
+        <span id="audio-record-button" class="flex items-center justify-center h-10 w-10 text-gray-400 ml-1">
+          <svg class="w-5 h-5"
+               fill="none"
+               stroke="currentColor"
+               viewBox="0 0 24 24"
+               xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+          </svg>
+        </span>
+        <div class="w-full">
+          <%= form.text_field :content, placeholder: "Type your message here...", id: "message_update", class: 'border border-transparent w-full focus:outline-none text-sm h-10 flex items-center', placeholder: "Type your message...." %>
+        </div>
+        <div class="flex flex-row">
+          <!-- Add any additional elements inside the flex row if needed -->
+        </div>
+      </div>
+
+      <div class="ml-6">
+        <button type="submit" class="flex items-center justify-center h-10 w-10 rounded-full bg-gray-200 hover:bg-gray-300 text-indigo-800 text-white">
+          <svg class="w-5 h-5 transform rotate-90 -mr-px"
+               fill="none"
+               stroke="currentColor"
+               viewBox="0 0 24 24"
+               xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  <% end %>
+</div>

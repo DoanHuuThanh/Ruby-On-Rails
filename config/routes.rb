@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'chatboxs/index'
   get 'password_resets/new'
   get 'password_resets/edit'
   root 'static_pages#home'
@@ -32,6 +33,15 @@ Rails.application.routes.draw do
   resources :relationships, only: %i[create destroy]
   resources :comments, only: %i[create update destroy]
   resources :reactions, only: %i[create]
+  resources :messages
+  resources :conversations do
+    member do
+      get 'user_conversation'
+    end
+    collection do
+      post 'add_user_to_group'
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

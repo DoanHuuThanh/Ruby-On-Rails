@@ -4,6 +4,11 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: %i[create destroy]
   skip_before_action :verify_authenticity_token
+
+  def show
+    @micropost = Micropost.find(params[:id])
+  end
+
   def create
     @micropost = current_user.microposts.build(micropost_params)
     @micropost.image.attach(params[:micropost][:image])

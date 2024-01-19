@@ -1,0 +1,5 @@
+:scheduler:
+  :schedule:
+     dailyreport_job:
+       cron: '0 8 * * *'
+       class: 'DailyreportJob'

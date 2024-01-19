@@ -79,7 +79,18 @@ RSpec.configure do |config|
     c.include FactoryBot::Syntax::Methods
     c.include ControllerMacros, type: :controller
     c.include ActionCable::TestHelper
+    c.before(:each) do
+      ActiveJob::Base.queue_adapter = :test
+    end
+    c.include ActiveJob::TestHelper
   end
+
+  RSpec::Sidekiq.configure do |c|
+    c.clear_all_enqueued_jobs = true
+    c.enable_terminal_colours = true
+    c.warn_when_jobs_not_processed_by_sidekiq = true
+  end
+
   FactoryBot::SyntaxRunner.class_eval do
     include RSpec::Mocks::ExampleMethods
   end

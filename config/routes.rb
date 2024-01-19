@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+
+  mount Sidekiq::Web => '/sidekiq'
   get 'chatboxs/index'
   get 'password_resets/new'
   get 'password_resets/edit'
@@ -29,7 +32,7 @@ Rails.application.routes.draw do
 
   resources :account_activations, only: :edit
   resources :password_resets, only: %i[create new update edit]
-  resources :microposts, only: %i[create destroy]
+  resources :microposts, only: %i[create destroy show]
   resources :relationships, only: %i[create destroy]
   resources :comments, only: %i[create update destroy]
   resources :reactions, only: %i[create]

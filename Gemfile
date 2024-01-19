@@ -29,7 +29,7 @@ gem 'stimulus-rails'
 gem 'jbuilder'
 
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '>= 4.0.1'
+gem 'redis', '>= 5.0.8'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -71,6 +71,7 @@ group :test do
   gem 'capybara'
   gem 'minitest-reporters'
   gem 'rspec-rails'
+  gem 'rspec-sidekiq'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 6.0'
 end
@@ -90,11 +91,8 @@ gem 'will_paginate', '~> 4.0'
 
 gem 'sass-rails'
 
-gem 'jquery-rails'
-
-gem 'devise'
-
 gem 'active_storage_validations'
+gem 'jquery-rails'
 gem 'omniauth-google-oauth2'
 
 gem 'omniauth-github', '~> 2.0.0'
@@ -105,3 +103,11 @@ gem 'action-cable-testing'
 gem 'cable_ready'
 gem 'dotenv-rails'
 gem 'font-awesome-rails'
+gem 'slack-ruby-client'
+
+gem 'sidekiq', '~> 7.2.0'
+
+gem 'faker'
+gem 'rubocop'
+gem 'sidekiq-scheduler', '~> 5.0'
+gem 'simplecov', require: false, group: :test

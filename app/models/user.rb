@@ -16,6 +16,7 @@ class User < ApplicationRecord
   before_create :create_activation_digest
   before_create :default_activated
   scope :all_except, ->(user) { where.not(id: user) }
+  scope :new_user_count, -> { where(created_at: Date.yesterday.beginning_of_day..Date.yesterday.end_of_day).count }
 
   validates :name,  presence: true, length: { maximum: 200 }
   validates :email, presence: true, length: { maximum: 200, minimum: 6 },

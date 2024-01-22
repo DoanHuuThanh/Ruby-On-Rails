@@ -69,6 +69,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'faker'
   gem 'minitest-reporters'
   gem 'rspec-rails'
   gem 'rspec-sidekiq'
@@ -87,27 +88,36 @@ gem 'tailwindcss-rails', '~> 2.0'
 
 gem 'pry-rails', group: :development
 
-gem 'will_paginate', '~> 4.0'
-
-gem 'sass-rails'
+gem 'action-cable-testing'
 
 gem 'active_storage_validations'
-gem 'jquery-rails'
-gem 'omniauth-google-oauth2'
 
-gem 'omniauth-github', '~> 2.0.0'
+gem 'cable_ready'
+
+gem 'dotenv-rails'
+
+gem 'font-awesome-rails'
+
+gem 'jquery-rails'
 
 gem 'omniauth-facebook'
 
-gem 'action-cable-testing'
-gem 'cable_ready'
-gem 'dotenv-rails'
-gem 'font-awesome-rails'
-gem 'slack-ruby-client'
+gem 'omniauth-github', '~> 2.0.0'
+
+gem 'omniauth-google-oauth2'
+
+gem 'ransack'
+
+gem 'rubocop'
+
+gem 'sass-rails'
 
 gem 'sidekiq', '~> 7.2.0'
 
-gem 'faker'
-gem 'rubocop'
 gem 'sidekiq-scheduler', '~> 5.0'
+
 gem 'simplecov', require: false, group: :test
+
+gem 'slack-ruby-client'
+
+gem 'will_paginate', '~> 4.0'

@@ -30,7 +30,8 @@ class DailyreportJob < ApplicationJob
     micropost_with_max_count = nil
 
     post.each do |micropost|
-      count = micropost.comments.count
+      comments = micropost.comments
+      count = comments.size
       comment = Micropost.where(parent_id: micropost.id)
       count += Micropost.where(parent_id: comment.pluck(:id)).count
       micropost_with_max_count << micropost if count == max_count

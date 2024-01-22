@@ -121,3 +121,5 @@ gem 'simplecov', require: false, group: :test
 gem 'slack-ruby-client'
 
 gem 'will_paginate', '~> 4.0'
+
+gem 'devise', '~> 4.9', '>= 4.9.3'

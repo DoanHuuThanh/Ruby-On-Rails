@@ -29,7 +29,7 @@ gem 'stimulus-rails'
 gem 'jbuilder'
 
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '>= 4.0.1'
+gem 'redis', '>= 5.0.8'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -69,8 +69,10 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'faker'
   gem 'minitest-reporters'
   gem 'rspec-rails'
+  gem 'rspec-sidekiq'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 6.0'
 end
@@ -86,22 +88,38 @@ gem 'tailwindcss-rails', '~> 2.0'
 
 gem 'pry-rails', group: :development
 
-gem 'will_paginate', '~> 4.0'
+gem 'action-cable-testing'
 
-gem 'sass-rails'
+gem 'active_storage_validations'
+
+gem 'cable_ready'
+
+gem 'dotenv-rails'
+
+gem 'font-awesome-rails'
 
 gem 'jquery-rails'
 
-gem 'devise'
-
-gem 'active_storage_validations'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
 
 gem 'omniauth-github', '~> 2.0.0'
 
-gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
-gem 'action-cable-testing'
-gem 'cable_ready'
-gem 'dotenv-rails'
-gem 'font-awesome-rails'
+gem 'ransack'
+
+gem 'rubocop'
+
+gem 'sass-rails'
+
+gem 'sidekiq', '~> 7.2.0'
+
+gem 'sidekiq-scheduler', '~> 5.0'
+
+gem 'simplecov', require: false, group: :test
+
+gem 'slack-ruby-client'
+
+gem 'will_paginate', '~> 4.0'
+
+gem 'devise', '~> 4.9', '>= 4.9.3'

@@ -1,6 +1,6 @@
 <% provide(:title, "Home") %>
 
-<% if logged_in? %>
+<% if logged_in?%>
   <div class="container mx-auto mt-8">
     <div class="flex justify-center">
       <div class="w-full md:w-1/2 flex">
@@ -36,8 +36,7 @@
         This is the home page for the
         <a href="https://www.railstutorial.org/" class="text-blue-500 hover:underline">Ruby on Rails Tutorial</a>
         sample application.
-      </h2>
-      <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+      </h2>  
     </div>
   </div>
 <% end %>

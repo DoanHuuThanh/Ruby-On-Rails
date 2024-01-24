@@ -8,8 +8,8 @@ class Micropost < ApplicationRecord
   has_many :comments, class_name: 'Micropost', foreign_key: 'parent_id', dependent: :destroy
   validates :content, presence: true, length: { maximum: 2000 }
   default_scope -> { order(created_at: :desc) }
-  scope :yesterday_posts, -> { where(parent_id: nil, created_at: Date.yesterday.beginning_of_day..Date.yesterday.end_of_day)}
-  scope :yesterday_comments, -> {
+  scope :yesterday_posts, -> { where(parent_id: nil, created_at: Date.yesterday.beginning_of_day..Date.yesterday.end_of_day) }
+  scope :yesterday_comments, lambda {
     where(created_at: Date.yesterday.beginning_of_day..Date.yesterday.end_of_day)
       .where.not(parent_id: nil).count
   }

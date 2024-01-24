@@ -100,6 +100,10 @@ gem 'font-awesome-rails'
 
 gem 'jquery-rails'
 
+gem 'omniauth'
+
+gem 'omniauth-rails_csrf_protection'
+
 gem 'omniauth-facebook'
 
 gem 'omniauth-github', '~> 2.0.0'
@@ -123,3 +127,5 @@ gem 'slack-ruby-client'
 gem 'will_paginate', '~> 4.0'
 
 gem 'devise', '~> 4.9', '>= 4.9.3'
+
+gem 'letter_opener', group: :development

@@ -83,6 +83,8 @@ RSpec.configure do |config|
       ActiveJob::Base.queue_adapter = :test
     end
     c.include ActiveJob::TestHelper
+    c.include Devise::Test::ControllerHelpers, type: :controller
+    c.include Devise::Test::ControllerHelpers, type: :view
   end
 
   RSpec::Sidekiq.configure do |c|

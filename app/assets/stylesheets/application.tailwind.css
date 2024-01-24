@@ -188,3 +188,7 @@ li img {
 .form_edit_mes {
   display: none;
 }
+
+.icon_omniauth {
+  font-size: 50px;
+}

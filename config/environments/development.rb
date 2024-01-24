@@ -69,12 +69,9 @@ Rails.application.configure do
   config.assets.quiet = true
 
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: '127.0.0.1',
-    port: 1025
-  }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 
   config.active_storage.variant_processor = true
   config.hosts << '5506-118-70-67-83.ngrok-free.app'

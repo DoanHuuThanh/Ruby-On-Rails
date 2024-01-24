@@ -11,9 +11,7 @@
           <%= link_to user.name, user, data: {user_id: user.id} , class: "link text-blue-600 hover:underline font-semibold block mb-2" %>
           
           <% if current_user.admin? && !current_user?(user) %>
-          <!-- Trong HTML hoặc ERB view -->
                 <button class="delete-user-button" id="user_<%=user.id%>" data-user-id="<%=user.id%>">Delete</button> 
-         <!--$(".delete-user-button").data('user-id') để lấy ra giá trị-->
           <% end %>
         </div>
       </div>  

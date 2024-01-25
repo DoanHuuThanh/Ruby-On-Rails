@@ -19,7 +19,7 @@ class UsersController < ApplicationController
         format.js
       end
     else
-      flash[:alert] = 'Người dùng không tồn tại.'
+      flash[:alert] = 'User does not exist'
       redirect_to root_path
     end
   end

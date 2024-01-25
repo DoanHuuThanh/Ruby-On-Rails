@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Devise::RegistrationsController, type: :controller do
   before do
-    @request.env['devise.mapping'] = Devise.mappings[:user] # Thay thế :user bằng resource bạn đang sử dụng
+    @request.env['devise.mapping'] = Devise.mappings[:user]
   end
 
   describe 'GET #new' do
@@ -17,12 +17,12 @@ RSpec.describe Devise::RegistrationsController, type: :controller do
     context 'with invalid parameters' do
       it 'does not create a new user' do
         expect {
-          post :create, params: { user: attributes_for(:user, email: nil) } # Thay thế :user bằng resource bạn đang sử dụng
+          post :create, params: { user: attributes_for(:user, email: nil) }
         }.not_to change(User, :count)
       end
 
       it 're-renders the new registration page' do
-        post :create, params: { user: attributes_for(:user, email: nil) } # Thay thế :user bằng resource bạn đang sử dụng
+        post :create, params: { user: attributes_for(:user, email: nil) }
         expect(response).to render_template(:new)
       end
     end

@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+      
+  web:
+    restart: always
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    environment:
+      - RAILS_ENV=${RAILS_ENV}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ".:/app"
+    depends_on:
+      - db
+      - redis
+      - sidekiq
+
+  sidekiq:
+    build: .
+    command: 'bundle exec sidekiq'
+    volumes:
+      - ../../:/myapp
+    environment:
+      - RAILS_ENV=${RAILS_ENV}
+      - REDIS_URL=${REDIS_URL}
+    depends_on:
+      - redis
+
+  redis:
+    image: redis
+    volumes:
+      - ../../tmp/db:/var/lib/redis/data

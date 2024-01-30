@@ -58,7 +58,6 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
-  gem 'letter_opener_web', '~> 2.0'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -130,3 +129,5 @@ gem 'will_paginate', '~> 4.0'
 gem 'devise', '~> 4.9', '>= 4.9.3'
 
 gem 'letter_opener', group: :development
+
+gem 'unicorn'

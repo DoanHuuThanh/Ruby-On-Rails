@@ -9,8 +9,6 @@ Rails.application.routes.draw do
     get '/signout' => 'devise/sessions#destroy'
   end
 
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
-
   require 'sidekiq/web'
 
   mount Sidekiq::Web => '/sidekiq'

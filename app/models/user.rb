@@ -2,6 +2,10 @@
 
 # Model User
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: %i[github google_oauth2 facebook]
   attr_accessor :remember_token, :activation_token, :reset_token
 
   has_many :microposts, dependent: :destroy
@@ -13,15 +17,13 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   before_save :downcase_email
-  before_create :create_activation_digest
   before_create :default_activated
   scope :all_except, ->(user) { where.not(id: user) }
   scope :new_user_count, -> { where(created_at: Date.yesterday.beginning_of_day..Date.yesterday.end_of_day).count }
 
   validates :name,  presence: true, length: { maximum: 200 }
   validates :email, presence: true, length: { maximum: 200, minimum: 6 },
-                    format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: { case_sensitive: false }, allow_nil: true
-  has_secure_password
+                    format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { maximum: 100, minimum: 3 }, allow_nil: true
 
   def self.digest(string)
@@ -57,11 +59,6 @@ class User < ApplicationRecord
     self.activated = false
   end
 
-  def create_activation_digest
-    self.activation_token =  User.new_token
-    self.activation_digest = User.digest(activation_token)
-  end
-
   def activate
     update_attribute(:activated, true)
     update_attribute(:activated_at, Time.zone.now)
@@ -87,9 +84,9 @@ class User < ApplicationRecord
 
   def feed
     following_ids = "SELECT followed_id FROM relationships
-      WHERE follower_id = :user_id"
+             WHERE follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids})
-      OR user_id = :user_id", user_id: id)
+             OR user_id = :user_id", user_id: id)
   end
 
   def follow(other_user)

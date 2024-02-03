@@ -1,0 +1,18 @@
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/racc-1.7.3/ext/racc/cparse
+/home/thanh2302/.asdf/installs/ruby/3.2.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/racc-1.7.3/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-3jlmf1 sitelibdir\=./.gem.20240202-388490-3jlmf1 clean
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/racc-1.7.3/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-3jlmf1 sitelibdir\=./.gem.20240202-388490-3jlmf1
+compiling cparse.c
+linking shared-object racc/cparse.so
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/racc-1.7.3/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-3jlmf1 sitelibdir\=./.gem.20240202-388490-3jlmf1 install
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20240202-388490-3jlmf1/racc
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/racc-1.7.3/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-3jlmf1 sitelibdir\=./.gem.20240202-388490-3jlmf1 clean

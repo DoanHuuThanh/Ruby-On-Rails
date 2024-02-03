@@ -71,10 +71,12 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
 
   config.active_storage.variant_processor = true
   config.hosts << '5506-118-70-67-83.ngrok-free.app'
 
+  config.cache_store = :redis_cache_store, { url: 'redis://redis:6379/0' }
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 

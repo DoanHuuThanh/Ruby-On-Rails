@@ -1,0 +1,16 @@
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+/home/thanh2302/.asdf/installs/ruby/3.2.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-cvmdvq sitelibdir\=./.gem.20240202-388490-cvmdvq clean
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-cvmdvq sitelibdir\=./.gem.20240202-388490-cvmdvq
+make: Nothing to be done for 'all'.
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-cvmdvq sitelibdir\=./.gem.20240202-388490-cvmdvq install
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-cvmdvq sitelibdir\=./.gem.20240202-388490-cvmdvq clean

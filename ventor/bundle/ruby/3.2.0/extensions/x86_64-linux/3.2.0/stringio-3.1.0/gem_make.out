@@ -1,0 +1,18 @@
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/stringio-3.1.0/ext/stringio
+/home/thanh2302/.asdf/installs/ruby/3.2.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/stringio-3.1.0/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-zfedsr sitelibdir\=./.gem.20240202-388490-zfedsr clean
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/stringio-3.1.0/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-zfedsr sitelibdir\=./.gem.20240202-388490-zfedsr
+compiling stringio.c
+linking shared-object stringio.so
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/stringio-3.1.0/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-zfedsr sitelibdir\=./.gem.20240202-388490-zfedsr install
+/usr/bin/install -c -m 0755 stringio.so ./.gem.20240202-388490-zfedsr
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/stringio-3.1.0/ext/stringio
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-zfedsr sitelibdir\=./.gem.20240202-388490-zfedsr clean

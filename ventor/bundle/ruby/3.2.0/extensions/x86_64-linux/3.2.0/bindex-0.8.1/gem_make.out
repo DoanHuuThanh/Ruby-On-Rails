@@ -1,0 +1,18 @@
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/bindex-0.8.1/ext/skiptrace
+/home/thanh2302/.asdf/installs/ruby/3.2.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-6r887f sitelibdir\=./.gem.20240202-388490-6r887f clean
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-6r887f sitelibdir\=./.gem.20240202-388490-6r887f
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.so
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-6r887f sitelibdir\=./.gem.20240202-388490-6r887f install
+/usr/bin/install -c -m 0755 cruby.so ./.gem.20240202-388490-6r887f/skiptrace/internal
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-6r887f sitelibdir\=./.gem.20240202-388490-6r887f clean

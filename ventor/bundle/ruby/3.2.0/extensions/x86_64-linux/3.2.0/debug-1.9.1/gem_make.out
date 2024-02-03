@@ -1,0 +1,19 @@
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/debug-1.9.1/ext/debug
+/home/thanh2302/.asdf/installs/ruby/3.2.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/debug-1.9.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-dlnqf4 sitelibdir\=./.gem.20240202-388490-dlnqf4 clean
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/debug-1.9.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-dlnqf4 sitelibdir\=./.gem.20240202-388490-dlnqf4
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/debug-1.9.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-dlnqf4 sitelibdir\=./.gem.20240202-388490-dlnqf4 install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20240202-388490-dlnqf4/debug
+
+current directory: /home/thanh2302/Documents/ruby/project/ventor/bundle/ruby/3.2.0/gems/debug-1.9.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240202-388490-dlnqf4 sitelibdir\=./.gem.20240202-388490-dlnqf4 clean

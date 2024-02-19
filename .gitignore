@@ -8,7 +8,7 @@
 /.bundle
 # Coverage
 /coverage/*
-/vendor/
+/.database*
 
 # Ignore all environment files (except templates).
 /.env*
